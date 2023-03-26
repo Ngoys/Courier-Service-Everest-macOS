@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C2E59A3529D008C30042828A /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = C2E59A3429D008C30042828A /* ArgumentParser */; };
 		C2E59A3D29D00ADC0042828A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A3C29D00ADC0042828A /* Utilities.swift */; };
+		C2E59A4E29D018660042828A /* MenuSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A4D29D018660042828A /* MenuSelection.swift */; };
+		C2E59A5029D019DA0042828A /* MenuSelectionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A4F29D019DA0042828A /* MenuSelectionError.swift */; };
 		F04E75DC27CE703F0073AEC2 /* CourierService_Library_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E75DB27CE703F0073AEC2 /* CourierService_Library_Test.swift */; };
 		F04E75DD27CE703F0073AEC2 /* libCourierService Library.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F04E75C627CE6F6D0073AEC2 /* libCourierService Library.a */; };
 		F04E75E327CE728E0073AEC2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E75AD27CE6E6A0073AEC2 /* main.swift */; };
@@ -46,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		C2E59A3C29D00ADC0042828A /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		C2E59A4D29D018660042828A /* MenuSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSelection.swift; sourceTree = "<group>"; };
+		C2E59A4F29D019DA0042828A /* MenuSelectionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSelectionError.swift; sourceTree = "<group>"; };
 		F04E75AA27CE6E6A0073AEC2 /* CourierService */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CourierService; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04E75AD27CE6E6A0073AEC2 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F04E75C627CE6F6D0073AEC2 /* libCourierService Library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCourierService Library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +118,8 @@
 			isa = PBXGroup;
 			children = (
 				C2E59A3C29D00ADC0042828A /* Utilities.swift */,
+				C2E59A4D29D018660042828A /* MenuSelection.swift */,
+				C2E59A4F29D019DA0042828A /* MenuSelectionError.swift */,
 			);
 			path = "CourierService Library";
 			sourceTree = "<group>";
@@ -270,6 +276,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2E59A5029D019DA0042828A /* MenuSelectionError.swift in Sources */,
+				C2E59A4E29D018660042828A /* MenuSelection.swift in Sources */,
 				C2E59A3D29D00ADC0042828A /* Utilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

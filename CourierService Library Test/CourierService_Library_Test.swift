@@ -7,5 +7,6 @@ class CourierService_Library_Test: XCTestCase {
 
         let a = ViewModel()
         a.a
+        
     }
 }
