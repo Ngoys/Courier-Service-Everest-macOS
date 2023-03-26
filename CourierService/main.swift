@@ -17,38 +17,82 @@ struct CourierService: ParsableCommand {
             print("----------------------------------------")
             print("")
 
-            //----------------------------------------
-            // MARK: - Base Fare
-            //----------------------------------------
-            print("Enter input in 'base_delivery_cost no_of_packages' format:")
-            let items = readLine()?.components(separatedBy: " ") ?? []
-            if let baseFare = Double(items.first ?? "")?.rounded(toPlaces: 2), baseFare >= 0 {
-
+            switch menu {
+            case .cost:
                 //----------------------------------------
-                // MARK: - Package Number
+                // MARK: - Base Fare
                 //----------------------------------------
-                if items.indices.contains(1), let packageNumber = Int(items[1]) {
-                    if packageNumber > 0 {
+                print("Enter input in 'base_delivery_cost no_of_packages' format:")
+                let items = readLine()?.components(separatedBy: " ") ?? []
+                if let baseFare = Double(items.first ?? "")?.rounded(toPlaces: 2), baseFare >= 0 {
 
-                        //----------------------------------------
-                        // MARK: - Packages Detail
-                        //----------------------------------------
-                        print("Enter packages details in 'pkg_id pkg_weight_in_kg distance_in_km offer_code' format:")
-//                        let packages =
-//                        readLine()
+                    //----------------------------------------
+                    // MARK: - Package Number
+                    //----------------------------------------
+                    if items.indices.contains(1), let packageNumber = Int(items[1]) {
+                        if packageNumber > 0 {
 
+                            //----------------------------------------
+                            // MARK: - Packages Detail
+                            //----------------------------------------
+                            var packages: [Package] = []
+                            var isAddingPackage = true
+                            let finishingKeyword = "Done"
+                            
+                            while isAddingPackage {
+                                print("\nEnter packages details in 'pkg_id pkg_weight_in_kg distance_in_km offer_code' format:")
+                                print("Enter '\(finishingKeyword)' when you finish inputting")
+                                let readLine = readLine()
 
+                                if readLine == finishingKeyword {
+                                    isAddingPackage = false
+                                    break
+                                }
+
+                                let items = readLine?.components(separatedBy: " ") ?? []
+
+                                let id = items.first ?? ""
+                                var weightInKG = 0.0
+                                var distanceInKM = 0.0
+                                var offerCode: String?
+
+                                if items.indices.contains(1), let weightInKGParam = Double(items[1]) {
+                                    weightInKG = weightInKGParam
+                                } else {
+                                    continue
+                                }
+
+                                if items.indices.contains(2), let distanceInKMParam = Double(items[2]) {
+                                    distanceInKM = distanceInKMParam
+                                } else {
+                                    continue
+                                }
+
+                                if items.indices.contains(3) {
+                                    let offerCodeParam = String(items[3])
+                                    offerCode = offerCodeParam
+                                } else {
+                                    continue
+                                }
+
+                                let package = Package(id: id, weightInKG: weightInKG, distanceInKM: distanceInKM, offerCode: offerCode)
+                                packages.append(package)
+                            }
+                        } else {
+                            print(AppError.packageNumberLessThan1.errorDescription)
+                            throw AppError.packageNumberLessThan1
+                        }
                     } else {
-                        print(AppError.packageNumberLessThan1.errorDescription)
-                        throw AppError.packageNumberLessThan1
+                        print(AppError.invalidPackageNumber.errorDescription)
+                        throw AppError.invalidPackageNumber
                     }
                 } else {
-                    print(AppError.invalidPackageNumber.errorDescription)
-                    throw AppError.invalidPackageNumber
+                    print(AppError.invalidBaseFare.errorDescription)
+                    throw AppError.invalidBaseFare
                 }
-            } else {
-                print(AppError.invalidBaseFare.errorDescription)
-                throw AppError.invalidBaseFare
+
+            case .time:
+                fatalError("Shawn")
             }
         } else {
             print(AppError.invalidMenu.errorDescription)
