@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/shawnngo/Desktop/courier-service-macOS/.build/arm64-apple-macosx/debug/CourierService.build/master.swiftdeps"
+  },
+  "/Users/shawnngo/Desktop/courier-service-macOS/CourierService Library/Utilities.swift": {
+    "dependencies": "/Users/shawnngo/Desktop/courier-service-macOS/.build/arm64-apple-macosx/debug/CourierService.build/Utilities.d",
+    "object": "/Users/shawnngo/Desktop/courier-service-macOS/.build/arm64-apple-macosx/debug/CourierService.build/Utilities.swift.o",
+    "swiftmodule": "/Users/shawnngo/Desktop/courier-service-macOS/.build/arm64-apple-macosx/debug/CourierService.build/Utilities~partial.swiftmodule",
+    "swift-dependencies": "/Users/shawnngo/Desktop/courier-service-macOS/.build/arm64-apple-macosx/debug/CourierService.build/Utilities.swiftdeps"
+  }
+}

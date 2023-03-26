@@ -7,7 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F04E75D427CE6FC10073AEC2 /* Ultilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E75D327CE6FC10073AEC2 /* Ultilities.swift */; };
+		C2E59A3529D008C30042828A /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = C2E59A3429D008C30042828A /* ArgumentParser */; };
+		C2E59A3D29D00ADC0042828A /* DeliveryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A3C29D00ADC0042828A /* DeliveryViewModel.swift */; };
+		C2E59A4E29D018660042828A /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A4D29D018660042828A /* Menu.swift */; };
+		C2E59A5029D019DA0042828A /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A4F29D019DA0042828A /* AppError.swift */; };
+		C2E59A5529D0218C0042828A /* Number+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A5429D0218C0042828A /* Number+Extension.swift */; };
+		C2E59A5B29D0236F0042828A /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A5A29D0236F0042828A /* Package.swift */; };
+		C2E59A6329D050580042828A /* CouponStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A6229D050580042828A /* CouponStore.swift */; };
+		C2E59A6629D051580042828A /* Coupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A6529D051580042828A /* Coupon.swift */; };
+		C2E59A6829D051880042828A /* BaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A6729D051880042828A /* BaseStore.swift */; };
+		C2E59A6C29D052720042828A /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A6B29D052720042828A /* BaseViewModel.swift */; };
+		C2E59A6F29D052CB0042828A /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = C2E59A6E29D052CB0042828A /* Swinject */; };
+		C2E59A7329D052FC0042828A /* ServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A7229D052FC0042828A /* ServiceContainer.swift */; };
 		F04E75DC27CE703F0073AEC2 /* CourierService_Library_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E75DB27CE703F0073AEC2 /* CourierService_Library_Test.swift */; };
 		F04E75DD27CE703F0073AEC2 /* libCourierService Library.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F04E75C627CE6F6D0073AEC2 /* libCourierService Library.a */; };
 		F04E75E327CE728E0073AEC2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E75AD27CE6E6A0073AEC2 /* main.swift */; };
@@ -44,10 +55,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C2E59A3C29D00ADC0042828A /* DeliveryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryViewModel.swift; sourceTree = "<group>"; };
+		C2E59A4D29D018660042828A /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		C2E59A4F29D019DA0042828A /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		C2E59A5429D0218C0042828A /* Number+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+Extension.swift"; sourceTree = "<group>"; };
+		C2E59A5A29D0236F0042828A /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		C2E59A6229D050580042828A /* CouponStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponStore.swift; sourceTree = "<group>"; };
+		C2E59A6529D051580042828A /* Coupon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coupon.swift; sourceTree = "<group>"; };
+		C2E59A6729D051880042828A /* BaseStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStore.swift; sourceTree = "<group>"; };
+		C2E59A6B29D052720042828A /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		C2E59A7229D052FC0042828A /* ServiceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceContainer.swift; sourceTree = "<group>"; };
 		F04E75AA27CE6E6A0073AEC2 /* CourierService */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CourierService; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04E75AD27CE6E6A0073AEC2 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F04E75C627CE6F6D0073AEC2 /* libCourierService Library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCourierService Library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F04E75D327CE6FC10073AEC2 /* Ultilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ultilities.swift; sourceTree = "<group>"; };
 		F04E75D927CE703F0073AEC2 /* CourierService Library Test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CourierService Library Test.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04E75DB27CE703F0073AEC2 /* CourierService_Library_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourierService_Library_Test.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,7 +77,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2E59A3529D008C30042828A /* ArgumentParser in Frameworks */,
 				F04E75E427CE72A00073AEC2 /* libCourierService Library.a in Frameworks */,
+				C2E59A6F29D052CB0042828A /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +101,59 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C2E59A5629D022AA0042828A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				C2E59A5429D0218C0042828A /* Number+Extension.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		C2E59A5729D022B70042828A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C2E59A7229D052FC0042828A /* ServiceContainer.swift */,
+				C2E59A4F29D019DA0042828A /* AppError.swift */,
+				C2E59A6429D050640042828A /* Store */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C2E59A5829D022BF0042828A /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				C2E59A4D29D018660042828A /* Menu.swift */,
+				C2E59A5A29D0236F0042828A /* Package.swift */,
+				C2E59A6529D051580042828A /* Coupon.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		C2E59A6429D050640042828A /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				C2E59A6229D050580042828A /* CouponStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		C2E59A6929D051960042828A /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				C2E59A6729D051880042828A /* BaseStore.swift */,
+				C2E59A6B29D052720042828A /* BaseViewModel.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		C2E59A6A29D052440042828A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C2E59A3C29D00ADC0042828A /* DeliveryViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		F04E75A127CE6E6A0073AEC2 = {
 			isa = PBXGroup;
 			children = (
@@ -111,7 +186,11 @@
 		F04E75C727CE6F6D0073AEC2 /* CourierService Library */ = {
 			isa = PBXGroup;
 			children = (
-				F04E75D327CE6FC10073AEC2 /* Ultilities.swift */,
+				C2E59A6929D051960042828A /* Base */,
+				C2E59A6A29D052440042828A /* ViewModel */,
+				C2E59A5729D022B70042828A /* Services */,
+				C2E59A5829D022BF0042828A /* Modal */,
+				C2E59A5629D022AA0042828A /* Utilities */,
 			);
 			path = "CourierService Library";
 			sourceTree = "<group>";
@@ -158,6 +237,10 @@
 				F04E75E627CE72A00073AEC2 /* PBXTargetDependency */,
 			);
 			name = CourierService;
+			packageProductDependencies = (
+				C2E59A3429D008C30042828A /* ArgumentParser */,
+				C2E59A6E29D052CB0042828A /* Swinject */,
+			);
 			productName = Example;
 			productReference = F04E75AA27CE6E6A0073AEC2 /* CourierService */;
 			productType = "com.apple.product-type.tool";
@@ -228,6 +311,10 @@
 				Base,
 			);
 			mainGroup = F04E75A127CE6E6A0073AEC2;
+			packageReferences = (
+				C2E59A3329D008C30042828A /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+				C2E59A6D29D052CB0042828A /* XCRemoteSwiftPackageReference "Swinject" */,
+			);
 			productRefGroup = F04E75AB27CE6E6A0073AEC2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -262,7 +349,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F04E75D427CE6FC10073AEC2 /* Ultilities.swift in Sources */,
+				C2E59A5029D019DA0042828A /* AppError.swift in Sources */,
+				C2E59A5B29D0236F0042828A /* Package.swift in Sources */,
+				C2E59A6829D051880042828A /* BaseStore.swift in Sources */,
+				C2E59A4E29D018660042828A /* Menu.swift in Sources */,
+				C2E59A5529D0218C0042828A /* Number+Extension.swift in Sources */,
+				C2E59A6C29D052720042828A /* BaseViewModel.swift in Sources */,
+				C2E59A3D29D00ADC0042828A /* DeliveryViewModel.swift in Sources */,
+				C2E59A6329D050580042828A /* CouponStore.swift in Sources */,
+				C2E59A6629D051580042828A /* Coupon.swift in Sources */,
+				C2E59A7329D052FC0042828A /* ServiceContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +507,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7YFC525745;
 				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -422,6 +519,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F5XSARA75Z;
 				ENABLE_HARDENED_RUNTIME = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -439,6 +537,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -458,6 +557,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -471,6 +571,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7YFC525745;
 				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.imericxu.Example-Lib-Test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -486,6 +587,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7YFC525745;
 				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.imericxu.Example-Lib-Test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -534,6 +636,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C2E59A3329D008C30042828A /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		C2E59A6D29D052CB0042828A /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C2E59A3429D008C30042828A /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C2E59A3329D008C30042828A /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+		C2E59A6E29D052CB0042828A /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C2E59A6D29D052CB0042828A /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F04E75A227CE6E6A0073AEC2 /* Project object */;
 }
