@@ -3,6 +3,6 @@ import XCTest
 
 class CourierService_Library_Test: XCTestCase {
     func testExample() throws {
-        XCTAssertEqual(5, my_fun(a: 2, b: 3))
+        XCTAssertEqual(5, plus(a: 2, b: 3))
     }
 }

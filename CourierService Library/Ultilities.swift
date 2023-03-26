@@ -1,3 +1,3 @@
-public func my_fun(a: Int, b: Int) -> Int {
+public func plus(a: Int, b: Int) -> Int {
     a + b
 }
