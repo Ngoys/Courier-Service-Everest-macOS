@@ -10,7 +10,7 @@ public class CouponStore: BaseStore {
         return coupons
     }
 
-    public func checkForDiscount(offerCode: String, weightInKG: Double, distanceInKM: Double) -> Double {
+    public func checkForDiscountPercent(offerCode: String, weightInKG: Double, distanceInKM: Double) -> Double {
         guard let coupon = coupons.first(where: { $0.offerCode == offerCode }) else { return 0 }
 
         if distanceInKM >= coupon.minimumDistanceInKM &&

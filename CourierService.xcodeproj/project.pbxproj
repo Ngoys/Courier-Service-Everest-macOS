@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C2E59A3529D008C30042828A /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = C2E59A3429D008C30042828A /* ArgumentParser */; };
-		C2E59A3D29D00ADC0042828A /* DeliveryCostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A3C29D00ADC0042828A /* DeliveryCostViewModel.swift */; };
+		C2E59A3D29D00ADC0042828A /* DeliveryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A3C29D00ADC0042828A /* DeliveryViewModel.swift */; };
 		C2E59A4E29D018660042828A /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A4D29D018660042828A /* Menu.swift */; };
 		C2E59A5029D019DA0042828A /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A4F29D019DA0042828A /* AppError.swift */; };
 		C2E59A5529D0218C0042828A /* Number+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A5429D0218C0042828A /* Number+Extension.swift */; };
@@ -55,7 +55,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C2E59A3C29D00ADC0042828A /* DeliveryCostViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryCostViewModel.swift; sourceTree = "<group>"; };
+		C2E59A3C29D00ADC0042828A /* DeliveryViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryViewModel.swift; sourceTree = "<group>"; };
 		C2E59A4D29D018660042828A /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		C2E59A4F29D019DA0042828A /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		C2E59A5429D0218C0042828A /* Number+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+Extension.swift"; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 		C2E59A6A29D052440042828A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				C2E59A3C29D00ADC0042828A /* DeliveryCostViewModel.swift */,
+				C2E59A3C29D00ADC0042828A /* DeliveryViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -355,7 +355,7 @@
 				C2E59A4E29D018660042828A /* Menu.swift in Sources */,
 				C2E59A5529D0218C0042828A /* Number+Extension.swift in Sources */,
 				C2E59A6C29D052720042828A /* BaseViewModel.swift in Sources */,
-				C2E59A3D29D00ADC0042828A /* DeliveryCostViewModel.swift in Sources */,
+				C2E59A3D29D00ADC0042828A /* DeliveryViewModel.swift in Sources */,
 				C2E59A6329D050580042828A /* CouponStore.swift in Sources */,
 				C2E59A6629D051580042828A /* Coupon.swift in Sources */,
 				C2E59A7329D052FC0042828A /* ServiceContainer.swift in Sources */,

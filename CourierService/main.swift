@@ -28,51 +28,51 @@ struct CourierService: ParsableCommand {
 
             switch menu {
             case .cost:
-                let viewModel = DeliveryCostViewModel(couponStore: ServiceContainer.container.resolve(CouponStore.self)!)
+                let viewModel = DeliveryViewModel(couponStore: ServiceContainer.container.resolve(CouponStore.self)!)
 
                 //----------------------------------------
                 // MARK: - Base Fare
                 //----------------------------------------
                 print("Enter input in 'base_delivery_cost no_of_packages' format:")
                 let items = readLine()?.components(separatedBy: " ") ?? []
-                if let baseFare = Double(items.first ?? "")?.rounded(toPlaces: 2), baseFare >= 0 {
+                if let baseDeliveryCost = Double(items.first ?? "")?.rounded(toPlaces: 2), baseDeliveryCost >= 0 {
+                    print()
 
                     //----------------------------------------
                     // MARK: - Package Number
                     //----------------------------------------
-                    if items.indices.contains(1), let packageNumber = Int(items[1]) {
-                        if packageNumber > 0 {
+                    if items.indices.contains(1), let numberOfPackages = Int(items[1]) {
+                        if numberOfPackages > 0 {
 
                             //----------------------------------------
                             // MARK: - Packages Detail
                             //----------------------------------------
-                            var isAddingPackage = true
-                            let finishedKeyword = "Done"
-
-                            print("\nEnter packages details in 'pkg_id pkg_weight_in_kg distance_in_km offer_code' format:")
-                            while isAddingPackage {
-                                print("Enter '\(finishedKeyword)' when you finish inputting")
+                            var count = viewModel.getPackages().count
+                            while count < numberOfPackages {
+                                print("Enter \((count + 1).ordinal ?? "") packages details in 'pkg_id pkg_weight_in_kg distance_in_km offer_code' format:")
 
                                 let readLine = readLine()
-                                if readLine == finishedKeyword {
-                                    isAddingPackage = false
-                                    break
-                                }
 
                                 do {
                                     try viewModel.addPackage(text: readLine)
+                                    count += 1
                                 } catch {
                                     if let appError = error as? AppError {
                                         print(appError.errorDescription)
-                                        print("")
+                                        print()
                                     }
                                     continue
                                 }
 
-                                print("")
+                                print()
                             }
 
-                            print(viewModel.getPackages())
+                            print("----------------------------------------")
+                            print("Answer")
+                            print("----------------------------------------")
+                            viewModel.getPackages().forEach { package in
+                                print("\(package.id) \(viewModel.calculateDiscountedDeliveryCost(baseDeliveryCost: baseDeliveryCost, package: package).removeZerosFromEnd()) \(viewModel.calculateFinalDeliveryCost(baseDeliveryCost: baseDeliveryCost, package: package).removeZerosFromEnd())")
+                            }
                             
                         } else {
                             print(AppError.packageNumberLessThan1.errorDescription)
