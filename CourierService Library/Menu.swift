@@ -1,6 +1,6 @@
 import Foundation
 
-public enum MenuSelection: String, Hashable {
+public enum Menu: String, Hashable {
     case cost
     case time
 
