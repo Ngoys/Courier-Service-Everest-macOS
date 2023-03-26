@@ -4,6 +4,7 @@ public enum AppError: Error, Equatable {
     case invalidMenu
     case invalidBaseFare
     case invalidPackageNumber
+    case packageNumberLessThan1
 
     //----------------------------------------
     // MARK: - Properties
@@ -18,7 +19,10 @@ public enum AppError: Error, Equatable {
             return "Invalid base fare input"
 
         case .invalidPackageNumber:
-            return "Invalid package number"
+            return "Invalid number of package"
+
+        case .packageNumberLessThan1:
+            return "Number of package must be more than 0"
         }
     }
 }

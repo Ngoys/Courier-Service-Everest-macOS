@@ -11,10 +11,10 @@ public enum Menu: String, Hashable {
     public var name: String {
         switch self {
         case .cost:
-            return "Total Delivery Cost"
+            return "total delivery cost"
 
         case .time:
-            return "Total Delivery Time"
+            return "total delivery time"
         }
     }
 }
