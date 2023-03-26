@@ -11,25 +11,30 @@ struct CourierService: ParsableCommand {
         //----------------------------------------
         print("Menu option ('cost' or 'time'):")
         if let menuString = readLine(), let menu = Menu(rawValue: menuString) {
+            print("")
+            print("----------------------------------------")
             print("Calculating \(menu.name)!")
+            print("----------------------------------------")
+            print("")
 
             //----------------------------------------
             // MARK: - Base Fare
             //----------------------------------------
-            print("Enter the base fare:")
-            if let baseFare = Double(readLine() ?? "")?.rounded(toPlaces: 2) {
-                
+            print("Enter input in 'base_delivery_cost no_of_packages' format:")
+            let items = readLine()?.components(separatedBy: " ") ?? []
+            if let baseFare = Double(items.first ?? "")?.rounded(toPlaces: 2), baseFare >= 0 {
+
                 //----------------------------------------
                 // MARK: - Package Number
                 //----------------------------------------
-                print("Enter the number of packages:")
-                if let packageNumber = Int(readLine() ?? "") {
+                if items.indices.contains(1), let packageNumber = Int(items[1]) {
                     if packageNumber > 0 {
 
                         //----------------------------------------
                         // MARK: - Packages Detail
                         //----------------------------------------
                         print("Enter packages details in 'pkg_id pkg_weight_in_kg distance_in_km offer_code' format:")
+//                        let packages =
 //                        readLine()
 
 

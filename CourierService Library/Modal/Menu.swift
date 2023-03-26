@@ -8,7 +8,7 @@ public enum Menu: String, Hashable {
     // MARK: - Properties
     //----------------------------------------
 
-    var name: String {
+    public var name: String {
         switch self {
         case .cost:
             return "total delivery cost"
