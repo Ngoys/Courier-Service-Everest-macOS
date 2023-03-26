@@ -1,10 +1,10 @@
 import Foundation
 
 public struct Package {
-    let id: String
-    let weightInKG: Double?
-    let distanceInKM: Double?
-    let offerCode: String?
+    public let id: String
+    public let weightInKG: Double?
+    public let distanceInKM: Double?
+    public let offerCode: String?
 
     //----------------------------------------
     // MARK: - Initialization

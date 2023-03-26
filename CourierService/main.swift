@@ -19,6 +19,8 @@ struct CourierService: ParsableCommand {
 
             switch menu {
             case .cost:
+                let viewModel = CostViewModel(test: "Shawn")
+
                 //----------------------------------------
                 // MARK: - Base Fare
                 //----------------------------------------
@@ -35,49 +37,34 @@ struct CourierService: ParsableCommand {
                             //----------------------------------------
                             // MARK: - Packages Detail
                             //----------------------------------------
-                            var packages: [Package] = []
                             var isAddingPackage = true
-                            let finishingKeyword = "Done"
-                            
-                            while isAddingPackage {
-                                print("\nEnter packages details in 'pkg_id pkg_weight_in_kg distance_in_km offer_code' format:")
-                                print("Enter '\(finishingKeyword)' when you finish inputting")
-                                let readLine = readLine()
+                            let finishedKeyword = "Done"
 
-                                if readLine == finishingKeyword {
+                            print("\nEnter packages details in 'pkg_id pkg_weight_in_kg distance_in_km offer_code' format:")
+                            while isAddingPackage {
+                                print("Enter '\(finishedKeyword)' when you finish inputting")
+
+                                let readLine = readLine()
+                                if readLine == finishedKeyword {
                                     isAddingPackage = false
                                     break
                                 }
 
-                                let items = readLine?.components(separatedBy: " ") ?? []
-
-                                let id = items.first ?? ""
-                                var weightInKG = 0.0
-                                var distanceInKM = 0.0
-                                var offerCode: String?
-
-                                if items.indices.contains(1), let weightInKGParam = Double(items[1]) {
-                                    weightInKG = weightInKGParam
-                                } else {
+                                do {
+                                    try viewModel.addPackage(text: readLine)
+                                } catch {
+                                    if let appError = error as? AppError {
+                                        print(appError.errorDescription)
+                                        print("")
+                                    }
                                     continue
                                 }
 
-                                if items.indices.contains(2), let distanceInKMParam = Double(items[2]) {
-                                    distanceInKM = distanceInKMParam
-                                } else {
-                                    continue
-                                }
-
-                                if items.indices.contains(3) {
-                                    let offerCodeParam = String(items[3])
-                                    offerCode = offerCodeParam
-                                } else {
-                                    continue
-                                }
-
-                                let package = Package(id: id, weightInKG: weightInKG, distanceInKM: distanceInKM, offerCode: offerCode)
-                                packages.append(package)
+                                print("")
                             }
+
+                            print(viewModel.getPackages())
+                            
                         } else {
                             print(AppError.packageNumberLessThan1.errorDescription)
                             throw AppError.packageNumberLessThan1

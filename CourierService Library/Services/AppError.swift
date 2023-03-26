@@ -5,6 +5,9 @@ public enum AppError: Error, Equatable {
     case invalidBaseFare
     case invalidPackageNumber
     case packageNumberLessThan1
+    case invalidPackageWithSameID
+    case invalidWeightInKG
+    case invalidDistanceInKM
 
     //----------------------------------------
     // MARK: - Properties
@@ -23,6 +26,15 @@ public enum AppError: Error, Equatable {
 
         case .packageNumberLessThan1:
             return "Number of package must be more than 0"
+
+        case .invalidPackageWithSameID:
+            return "Cannot have package with same ID"
+
+        case .invalidWeightInKG:
+            return "Invalid weight input, input must be in digit"
+
+        case .invalidDistanceInKM:
+            return "Invalid distance input, input must be in digit"
         }
     }
 }

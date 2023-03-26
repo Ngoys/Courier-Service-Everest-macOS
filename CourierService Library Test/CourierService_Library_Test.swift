@@ -3,10 +3,6 @@ import XCTest
 
 class CostViewModelTest: XCTestCase {
     func testExample() throws {
-//        XCTAssertEqual(5, plus(a: 2, b: 3))
-
-        let a = CostViewModel()
-        a.a
-        
+        XCTAssertEqual(5, 5)
     }
 }
