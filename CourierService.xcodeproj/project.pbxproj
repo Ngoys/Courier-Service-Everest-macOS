@@ -112,8 +112,8 @@
 		C2E59A5729D022B70042828A /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				C2E59A4F29D019DA0042828A /* AppError.swift */,
 				C2E59A7229D052FC0042828A /* ServiceContainer.swift */,
+				C2E59A4F29D019DA0042828A /* AppError.swift */,
 				C2E59A6429D050640042828A /* Store */,
 			);
 			path = Services;
@@ -186,8 +186,8 @@
 		F04E75C727CE6F6D0073AEC2 /* CourierService Library */ = {
 			isa = PBXGroup;
 			children = (
-				C2E59A6A29D052440042828A /* ViewModel */,
 				C2E59A6929D051960042828A /* Base */,
+				C2E59A6A29D052440042828A /* ViewModel */,
 				C2E59A5729D022B70042828A /* Services */,
 				C2E59A5829D022BF0042828A /* Modal */,
 				C2E59A5629D022AA0042828A /* Utilities */,
