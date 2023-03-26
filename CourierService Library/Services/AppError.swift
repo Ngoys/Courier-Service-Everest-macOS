@@ -10,7 +10,7 @@ public enum AppError: Error, Equatable {
     // MARK: - Properties
     //----------------------------------------
 
-    public var errorDescription: String {
+    var errorDescription: String {
         switch self {
         case .invalidMenu:
             return "Invalid menu input"

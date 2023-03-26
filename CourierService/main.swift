@@ -17,8 +17,8 @@ struct CourierService: ParsableCommand {
             // MARK: - Base Fare
             //----------------------------------------
             print("Enter the base fare:")
-            if let baseFare = Double(readLine() ?? "") {
-
+            if let baseFare = Double(readLine() ?? "")?.rounded(toPlaces: 2) {
+                
                 //----------------------------------------
                 // MARK: - Package Number
                 //----------------------------------------

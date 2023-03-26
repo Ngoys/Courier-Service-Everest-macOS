@@ -1,6 +1,6 @@
 import Foundation
 
-public class ViewModel {
+public class CostViewModel {
     let a = "hello"
 
     
