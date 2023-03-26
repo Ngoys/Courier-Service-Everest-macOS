@@ -9,7 +9,7 @@ struct CourierService: ParsableCommand {
         //----------------------------------------
         // MARK: - Menu Selection
         //----------------------------------------
-        print("Menu option ('cost' or 'time'):")
+        print("Menu option ('cost' or 'time'):", terminator: " ")
         if let menuString = readLine(), let menu = Menu(rawValue: menuString) {
             print("")
             print("----------------------------------------")
@@ -19,7 +19,7 @@ struct CourierService: ParsableCommand {
 
             switch menu {
             case .cost:
-                let viewModel = CostViewModel(test: "Shawn")
+                let viewModel = DeliveryCostViewModel(test: "Shawn")
 
                 //----------------------------------------
                 // MARK: - Base Fare

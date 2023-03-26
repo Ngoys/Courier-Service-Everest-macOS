@@ -1,6 +1,6 @@
 import Foundation
 
-public class CostViewModel {
+public class DeliveryCostViewModel {
 
     //----------------------------------------
     // MARK:- Initialization
