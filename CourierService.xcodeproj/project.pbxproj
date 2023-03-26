@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F04E75D427CE6FC10073AEC2 /* Ultilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E75D327CE6FC10073AEC2 /* Ultilities.swift */; };
+		C2E59A3529D008C30042828A /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = C2E59A3429D008C30042828A /* ArgumentParser */; };
+		C2E59A3D29D00ADC0042828A /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A3C29D00ADC0042828A /* Utilities.swift */; };
 		F04E75DC27CE703F0073AEC2 /* CourierService_Library_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E75DB27CE703F0073AEC2 /* CourierService_Library_Test.swift */; };
 		F04E75DD27CE703F0073AEC2 /* libCourierService Library.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F04E75C627CE6F6D0073AEC2 /* libCourierService Library.a */; };
 		F04E75E327CE728E0073AEC2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E75AD27CE6E6A0073AEC2 /* main.swift */; };
@@ -44,10 +45,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C2E59A3C29D00ADC0042828A /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		F04E75AA27CE6E6A0073AEC2 /* CourierService */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CourierService; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04E75AD27CE6E6A0073AEC2 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F04E75C627CE6F6D0073AEC2 /* libCourierService Library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCourierService Library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F04E75D327CE6FC10073AEC2 /* Ultilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ultilities.swift; sourceTree = "<group>"; };
 		F04E75D927CE703F0073AEC2 /* CourierService Library Test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CourierService Library Test.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04E75DB27CE703F0073AEC2 /* CourierService_Library_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourierService_Library_Test.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2E59A3529D008C30042828A /* ArgumentParser in Frameworks */,
 				F04E75E427CE72A00073AEC2 /* libCourierService Library.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,7 +113,7 @@
 		F04E75C727CE6F6D0073AEC2 /* CourierService Library */ = {
 			isa = PBXGroup;
 			children = (
-				F04E75D327CE6FC10073AEC2 /* Ultilities.swift */,
+				C2E59A3C29D00ADC0042828A /* Utilities.swift */,
 			);
 			path = "CourierService Library";
 			sourceTree = "<group>";
@@ -158,6 +160,9 @@
 				F04E75E627CE72A00073AEC2 /* PBXTargetDependency */,
 			);
 			name = CourierService;
+			packageProductDependencies = (
+				C2E59A3429D008C30042828A /* ArgumentParser */,
+			);
 			productName = Example;
 			productReference = F04E75AA27CE6E6A0073AEC2 /* CourierService */;
 			productType = "com.apple.product-type.tool";
@@ -228,6 +233,9 @@
 				Base,
 			);
 			mainGroup = F04E75A127CE6E6A0073AEC2;
+			packageReferences = (
+				C2E59A3329D008C30042828A /* XCRemoteSwiftPackageReference "swift-argument-parser" */,
+			);
 			productRefGroup = F04E75AB27CE6E6A0073AEC2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -262,7 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F04E75D427CE6FC10073AEC2 /* Ultilities.swift in Sources */,
+				C2E59A3D29D00ADC0042828A /* Utilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,6 +542,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C2E59A3329D008C30042828A /* XCRemoteSwiftPackageReference "swift-argument-parser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-argument-parser.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C2E59A3429D008C30042828A /* ArgumentParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C2E59A3329D008C30042828A /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F04E75A227CE6E6A0073AEC2 /* Project object */;
 }

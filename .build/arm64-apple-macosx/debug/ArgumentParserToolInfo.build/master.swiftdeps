@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)"
+options: "8d3c80da6455d54c1f941ce3f58c98eaf83baf32ec524ca0c82ed4e27ff0ed3c"
+build_start_time: [1679807571, 471577167]
+build_end_time: [1679807571, 873093128]
+inputs:
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParserToolInfo/ToolInfo.swift"
+  : [1679807243, 792495250]

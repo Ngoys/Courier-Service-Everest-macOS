@@ -1,3 +1,13 @@
+import ArgumentParser
 import CourierService_Library
 
-print("3 + 5 = \(plus(a: 3, b: 5))")
+struct Menu: ParsableCommand {
+    @Argument() var highValue: Int
+
+    func run() {
+        print("meow")
+        print(Int.random(in: 1...highValue))
+    }
+}
+
+Menu.main()

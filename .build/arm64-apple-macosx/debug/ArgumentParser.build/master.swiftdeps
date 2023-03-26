@@ -1,0 +1,84 @@
+version: "Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)"
+options: "19efaf900f00465010ae7a92dd7269709b9707ce8a10125d57ba347dfa70c582"
+build_start_time: [1679807571, 917149066]
+build_end_time: [1679807575, 330099105]
+inputs:
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Completions/BashCompletionsGenerator.swift"
+  : [1679807243, 775373458]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Completions/CompletionsGenerator.swift"
+  : [1679807243, 775501251]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Completions/FishCompletionsGenerator.swift"
+  : [1679807243, 775604248]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Completions/ZshCompletionsGenerator.swift"
+  : [1679807243, 775712490]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/Argument.swift"
+  : [1679807243, 781946659]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/ArgumentHelp.swift"
+  : [1679807243, 782078742]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/ArgumentVisibility.swift"
+  : [1679807243, 782197475]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/CompletionKind.swift"
+  : [1679807243, 782292604]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/Errors.swift"
+  : [1679807243, 782371520]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/Flag.swift"
+  : [1679807243, 782493352]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/NameSpecification.swift"
+  : [1679807243, 782593965]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/Option.swift"
+  : [1679807243, 782742977]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Properties/OptionGroup.swift"
+  : [1679807243, 782904148]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/AsyncParsableCommand.swift"
+  : [1679807243, 784453392]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/CommandConfiguration.swift"
+  : [1679807243, 784826517]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/EnumerableFlag.swift"
+  : [1679807243, 785004138]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/ExpressibleByArgument.swift"
+  : [1679807243, 785382270]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/ParsableArguments.swift"
+  : [1679807243, 785855531]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/ParsableArgumentsValidation.swift"
+  : [1679807243, 785971164]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsable Types/ParsableCommand.swift"
+  : [1679807243, 786180496]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/ArgumentDecoder.swift"
+  : [1679807243, 786429882]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/ArgumentDefinition.swift"
+  : [1679807243, 786546707]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/ArgumentSet.swift"
+  : [1679807243, 787880420]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/CommandParser.swift"
+  : [1679807243, 788342714]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/InputKey.swift"
+  : [1679807243, 788468837]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/InputOrigin.swift"
+  : [1679807243, 788575172]
+  "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/Name.swift": [1679807243, 788671016]
+  "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/Parsed.swift": [1679807243, 788927078]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/ParsedValues.swift"
+  : [1679807243, 789070129]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/ParserError.swift"
+  : [1679807243, 789146900]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Parsing/SplitArguments.swift"
+  : [1679807243, 789279937]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Usage/DumpHelpGenerator.swift"
+  : [1679807243, 789422035]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Usage/HelpCommand.swift"
+  : [1679807243, 789734840]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Usage/HelpGenerator.swift"
+  : [1679807243, 789866685]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Usage/MessageInfo.swift"
+  : [1679807243, 789952993]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Usage/UsageGenerator.swift"
+  : [1679807243, 790249824]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Utilities/CollectionExtensions.swift"
+  : [1679807243, 790647983]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Utilities/Platform.swift"
+  : [1679807243, 791617393]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Utilities/SequenceExtensions.swift"
+  : [1679807243, 791718959]
+  ? "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Utilities/StringExtensions.swift"
+  : [1679807243, 791793346]
+  "/Users/shawnngo/Desktop/courier-service-macOS/.build/checkouts/swift-argument-parser/Sources/ArgumentParser/Utilities/Tree.swift": [1679807243, 791885852]

@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)"
+options: "c4feb7572078e1bfebe35e1b6332bec7d78b1336e92a9288f3389e8a32a9b6ef"
+build_start_time: [1679807575, 370574951]
+build_end_time: [1679807575, 443871021]
+inputs:
+  "/Users/shawnngo/Desktop/courier-service-macOS/CourierService Library/Utilities.swift": [1679807385, 94785690]
