@@ -1,12 +1,13 @@
 import Foundation
 
-public class DeliveryCostViewModel {
+public class DeliveryCostViewModel: BaseViewModel {
 
     //----------------------------------------
     // MARK:- Initialization
     //----------------------------------------
 
-    public init(test: String) {
+    public init(couponStore: CouponStore) {
+        self.couponStore = couponStore
     }
 
     //----------------------------------------
@@ -57,4 +58,6 @@ public class DeliveryCostViewModel {
     //----------------------------------------
 
     private var packages: [Package] = []
+
+    private let couponStore: CouponStore
 }

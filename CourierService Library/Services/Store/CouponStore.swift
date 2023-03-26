@@ -1,6 +1,6 @@
 import Foundation
 
-class CouponStore: BaseStore {
+public class CouponStore: BaseStore {
 
     //----------------------------------------
     // MARK: - Initialization
@@ -13,7 +13,7 @@ class CouponStore: BaseStore {
     // MARK: - Actions
     //----------------------------------------
 
-    func fetchshawn() -> String {
+    public func fetchshawn() -> String {
         return "hahaha"
     }
 }

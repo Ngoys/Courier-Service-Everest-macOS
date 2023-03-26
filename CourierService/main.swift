@@ -3,7 +3,16 @@ import Foundation
 import CourierService_Library
 
 struct CourierService: ParsableCommand {
+
+    //----------------------------------------
+    // MARK: - Properties
+    //----------------------------------------
+
     static let configuration = CommandConfiguration(abstract: "Courier Service Menu")
+
+    //----------------------------------------
+    // MARK: - Actions
+    //----------------------------------------
 
     mutating func run() throws {
         //----------------------------------------
@@ -19,7 +28,7 @@ struct CourierService: ParsableCommand {
 
             switch menu {
             case .cost:
-                let viewModel = DeliveryCostViewModel(test: "Shawn")
+                let viewModel = DeliveryCostViewModel(couponStore: ServiceContainer.container.resolve(CouponStore.self)!)
 
                 //----------------------------------------
                 // MARK: - Base Fare

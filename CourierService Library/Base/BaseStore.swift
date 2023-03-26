@@ -1,5 +1,5 @@
 import Foundation
 
-class BaseStore {
+public class BaseStore {
 
 }
