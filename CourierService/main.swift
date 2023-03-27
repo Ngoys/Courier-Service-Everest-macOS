@@ -3,7 +3,7 @@ import Foundation
 import CourierService_Library
 
 struct CourierService: ParsableCommand {
-
+    //shawn PR merge develop > main branch
     //----------------------------------------
     // MARK: - Properties
     //----------------------------------------
@@ -24,7 +24,7 @@ struct CourierService: ParsableCommand {
         if let menuString = readLine(), let menu = Menu(rawValue: menuString) {
             print("")
             print("----------------------------------------")
-            print("Calculating \(menu.name)!")
+            print("Calculating \(menu.name)! for the packages delivery")
             print("----------------------------------------")
             print("")
 
@@ -93,7 +93,7 @@ struct CourierService: ParsableCommand {
 
 
 
-                                            
+
                                         } else {
                                             print(AppError.invalidMaxCarriableWeight.errorDescription)
                                         }
