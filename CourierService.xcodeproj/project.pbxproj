@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C22179D329D173B900F28247 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = C22179D229D173B900F28247 /* Swinject */; };
 		C2E59A3529D008C30042828A /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = C2E59A3429D008C30042828A /* ArgumentParser */; };
 		C2E59A3D29D00ADC0042828A /* DeliveryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A3C29D00ADC0042828A /* DeliveryViewModel.swift */; };
 		C2E59A4E29D018660042828A /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A4D29D018660042828A /* Menu.swift */; };
@@ -87,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C22179D329D173B900F28247 /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +260,9 @@
 			dependencies = (
 			);
 			name = "CourierService Library";
+			packageProductDependencies = (
+				C22179D229D173B900F28247 /* Swinject */,
+			);
 			productName = "Example Lib";
 			productReference = F04E75C627CE6F6D0073AEC2 /* libCourierService Library.a */;
 			productType = "com.apple.product-type.library.static";
@@ -657,6 +662,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C22179D229D173B900F28247 /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C2E59A6D29D052CB0042828A /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
 		C2E59A3429D008C30042828A /* ArgumentParser */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C2E59A3329D008C30042828A /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
