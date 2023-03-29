@@ -60,15 +60,15 @@ struct CourierService: ParsableCommand {
         //----------------------------------------
         // MARK: - Packages Detail
         //----------------------------------------
-        var count = viewModel.getPackages().count
-        while count < numberOfPackages {
-            print("Enter \((count + 1).ordinal ?? "") packages details in 'pkg_id pkg_weight_in_kg distance_in_km offer_code' format:")
+        var addedPackagesCount = 0
+        while addedPackagesCount < numberOfPackages {
+            print("Enter \((addedPackagesCount + 1).ordinal ?? "") packages details in 'pkg_id pkg_weight_in_kg distance_in_km offer_code' format:")
 
             let readLine = readLine()
 
             do {
                 try viewModel.addPackage(text: readLine)
-                count += 1
+                addedPackagesCount += 1
             } catch {
                 if let appError = error as? AppError {
                     print(appError.errorDescription)
@@ -80,14 +80,12 @@ struct CourierService: ParsableCommand {
             print()
         }
 
+        print("----------------------------------------")
+        print("Answer")
+        print("----------------------------------------")
         switch menu {
         case .cost:
-            print("----------------------------------------")
-            print("Answer")
-            print("----------------------------------------")
-            viewModel.getPackages().forEach { package in
-                print("\(package.id) \(viewModel.calculateDiscountedDeliveryCost(baseDeliveryCost: baseDeliveryCost, package: package).removeZerosFromEnd()) \(viewModel.calculateFinalDeliveryCost(baseDeliveryCost: baseDeliveryCost, package: package).removeZerosFromEnd())")
-            }
+            print(viewModel.getPackageOutput(baseDeliveryCost: baseDeliveryCost, withTime: false))
 
         case .time:
 

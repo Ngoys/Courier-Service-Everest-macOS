@@ -14,10 +14,6 @@ public class DeliveryViewModel: BaseViewModel {
     // MARK: - Actions
     //----------------------------------------
 
-    public func getPackages() -> [Package] {
-        return packages
-    }
-
     public func addPackage(text: String?) throws {
         // Split the text using a space " "
         // Remove whitespaces in each text
@@ -56,31 +52,35 @@ public class DeliveryViewModel: BaseViewModel {
         }
     }
 
-    public func calculateFinalDeliveryCost(baseDeliveryCost: Double, package: Package) -> Double {
-        let totalCost = getTotalCost(baseDeliveryCost: baseDeliveryCost, package: package)
-        let discountedCost = getDiscountedCost(baseDeliveryCost: baseDeliveryCost, package: package)
-        let finalCost = totalCost - discountedCost
-
-        return finalCost
-    }
-
-    public func calculateDiscountedDeliveryCost(baseDeliveryCost: Double, package: Package) -> Double {
-        return getDiscountedCost(baseDeliveryCost: baseDeliveryCost, package: package)
-    }
-
     private func getTotalCost(baseDeliveryCost: Double, package: Package) -> Double {
         let totalCost = baseDeliveryCost + (package.weightInKG * weightChargedRate) + (package.distanceInKM * distanceChargedRate)
-
         return totalCost
     }
 
     private func getDiscountedCost(baseDeliveryCost: Double, package: Package) -> Double {
         let discountPercent = couponStore.checkForDiscountPercent(offerCode: package.offerCode ?? "", weightInKG: package.weightInKG, distanceInKM: package.distanceInKM)
 
-        let totalCost = baseDeliveryCost + (package.weightInKG * weightChargedRate) + (package.distanceInKM * distanceChargedRate)
+        let totalCost = getTotalCost(baseDeliveryCost: baseDeliveryCost, package: package)
         let discountedCost = totalCost * discountPercent / 100
 
         return discountedCost
+    }
+
+    public func getPackageOutput(baseDeliveryCost:Double, withTime: Bool) -> String {
+        var answer = ""
+
+        packages.forEach { package in
+            let discountedCost = getDiscountedCost(baseDeliveryCost: baseDeliveryCost, package: package)
+            let finalCost = getTotalCost(baseDeliveryCost: baseDeliveryCost, package: package) - getDiscountedCost(baseDeliveryCost: baseDeliveryCost, package: package)
+
+            answer += "\(package.id) \(discountedCost.removeZerosFromEnd()) \(finalCost.removeZerosFromEnd())"
+
+            if package != packages.last {
+                answer += "\n"
+            }
+        }
+
+        return answer.isEmpty ? "N/A" : answer
     }
 
     //----------------------------------------
