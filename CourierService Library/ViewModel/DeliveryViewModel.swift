@@ -6,8 +6,17 @@ public class DeliveryViewModel: BaseViewModel {
     // MARK:- Initialization
     //----------------------------------------
 
-    public init(couponStore: CouponStore) {
+    public init(couponStore: CouponStore, vehicleStore: VehicleStore) {
         self.couponStore = couponStore
+        self.vehicleStore = vehicleStore
+        super.init()
+
+        self.packages = [
+            Package(id: "PKG1", weightInKG: 5, distanceInKM: 5, offerCode: "OFR001"),
+            Package(id: "PKG2", weightInKG: 15, distanceInKM: 5, offerCode: "OFR002"),
+            Package(id: "PKG3", weightInKG: 10, distanceInKM: 100, offerCode: "OFR003"),
+        ]
+        print(getPackageTotalDeliveryCostOutput(baseDeliveryCost: 100))
     }
 
     //----------------------------------------
@@ -66,14 +75,14 @@ public class DeliveryViewModel: BaseViewModel {
         return discountedCost
     }
 
-    public func getPackageOutput(baseDeliveryCost:Double, withTime: Bool) -> String {
+    public func getPackageTotalDeliveryCostOutput(baseDeliveryCost: Double) -> String {
         var answer = ""
 
         packages.forEach { package in
             let discountedCost = getDiscountedCost(baseDeliveryCost: baseDeliveryCost, package: package)
-            let finalCost = getTotalCost(baseDeliveryCost: baseDeliveryCost, package: package) - getDiscountedCost(baseDeliveryCost: baseDeliveryCost, package: package)
+            let finalCost = getTotalCost(baseDeliveryCost: baseDeliveryCost, package: package) - discountedCost
 
-            answer += "\(package.id) \(discountedCost.removeZerosFromEnd()) \(finalCost.removeZerosFromEnd())"
+            answer += "\(package.id) \(discountedCost.removeDecimalIfNeededToString() ?? "") \(finalCost.removeDecimalIfNeededToString() ?? "")"
 
             if package != packages.last {
                 answer += "\n"
@@ -90,6 +99,8 @@ public class DeliveryViewModel: BaseViewModel {
     private var packages: [Package] = []
 
     private let couponStore: CouponStore
+
+    private let vehicleStore: VehicleStore
 
     private let weightChargedRate = 10.0
 

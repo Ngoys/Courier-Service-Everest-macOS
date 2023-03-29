@@ -21,6 +21,10 @@ public class ServiceContainer {
         container.register(CouponStore.self) { r -> CouponStore in
             return CouponStore()
         }.inObjectScope(.container)
+        
+        container.register(VehicleStore.self) { r -> VehicleStore in
+            return VehicleStore()
+        }.inObjectScope(.container)
 
         return container
     }

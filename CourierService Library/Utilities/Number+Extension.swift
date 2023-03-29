@@ -12,13 +12,9 @@ public extension Double {
         return (self * divisor).rounded(.down) / divisor
     }
 
-    // https://stackoverflow.com/a/52114574
-    func removeZerosFromEnd() -> String {
-        let formatter = NumberFormatter()
-        let number = NSNumber(value: self)
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 16
-        return String(formatter.string(from: number) ?? "")
+    // https://stackoverflow.com/a/31390678
+    func removeDecimalIfNeededToString() -> String? {
+        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
     }
 }
 

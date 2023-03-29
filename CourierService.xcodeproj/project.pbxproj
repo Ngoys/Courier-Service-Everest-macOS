@@ -20,6 +20,8 @@
 		C2E59A6C29D052720042828A /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A6B29D052720042828A /* BaseViewModel.swift */; };
 		C2E59A6F29D052CB0042828A /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = C2E59A6E29D052CB0042828A /* Swinject */; };
 		C2E59A7329D052FC0042828A /* ServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A7229D052FC0042828A /* ServiceContainer.swift */; };
+		C2F6642C29D4131B005C4FEB /* VehicleStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F6642B29D4131B005C4FEB /* VehicleStore.swift */; };
+		C2F6642E29D413B1005C4FEB /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F6642D29D413B1005C4FEB /* Vehicle.swift */; };
 		F04E75DC27CE703F0073AEC2 /* CourierService_Library_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E75DB27CE703F0073AEC2 /* CourierService_Library_Test.swift */; };
 		F04E75DD27CE703F0073AEC2 /* libCourierService Library.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F04E75C627CE6F6D0073AEC2 /* libCourierService Library.a */; };
 		F04E75E327CE728E0073AEC2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E75AD27CE6E6A0073AEC2 /* main.swift */; };
@@ -66,6 +68,8 @@
 		C2E59A6729D051880042828A /* BaseStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStore.swift; sourceTree = "<group>"; };
 		C2E59A6B29D052720042828A /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		C2E59A7229D052FC0042828A /* ServiceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceContainer.swift; sourceTree = "<group>"; };
+		C2F6642B29D4131B005C4FEB /* VehicleStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleStore.swift; sourceTree = "<group>"; };
+		C2F6642D29D413B1005C4FEB /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
 		F04E75AA27CE6E6A0073AEC2 /* CourierService */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CourierService; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04E75AD27CE6E6A0073AEC2 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F04E75C627CE6F6D0073AEC2 /* libCourierService Library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCourierService Library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +131,7 @@
 				C2E59A4D29D018660042828A /* Menu.swift */,
 				C2E59A5A29D0236F0042828A /* Package.swift */,
 				C2E59A6529D051580042828A /* Coupon.swift */,
+				C2F6642D29D413B1005C4FEB /* Vehicle.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -135,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				C2E59A6229D050580042828A /* CouponStore.swift */,
+				C2F6642B29D4131B005C4FEB /* VehicleStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -354,6 +360,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2F6642E29D413B1005C4FEB /* Vehicle.swift in Sources */,
 				C2E59A5029D019DA0042828A /* AppError.swift in Sources */,
 				C2E59A5B29D0236F0042828A /* Package.swift in Sources */,
 				C2E59A6829D051880042828A /* BaseStore.swift in Sources */,
@@ -361,6 +368,7 @@
 				C2E59A5529D0218C0042828A /* Number+Extension.swift in Sources */,
 				C2E59A6C29D052720042828A /* BaseViewModel.swift in Sources */,
 				C2E59A3D29D00ADC0042828A /* DeliveryViewModel.swift in Sources */,
+				C2F6642C29D4131B005C4FEB /* VehicleStore.swift in Sources */,
 				C2E59A6329D050580042828A /* CouponStore.swift in Sources */,
 				C2E59A6629D051580042828A /* Coupon.swift in Sources */,
 				C2E59A7329D052FC0042828A /* ServiceContainer.swift in Sources */,

@@ -3,19 +3,26 @@ import Foundation
 import CourierService_Library
 
 struct CourierService: ParsableCommand {
-    
+
     //----------------------------------------
     // MARK: - Properties
     //----------------------------------------
 
     static let configuration = CommandConfiguration(abstract: "Courier Service Menu")
 
+    lazy var viewModel: DeliveryViewModel = {
+        return DeliveryViewModel(couponStore: ServiceContainer.container.resolve(CouponStore.self)!,
+                                 vehicleStore: ServiceContainer.container.resolve(VehicleStore.self)!)
+    }()
+
     //----------------------------------------
     // MARK: - Actions
     //----------------------------------------
 
     mutating func run() throws {
-        let viewModel = DeliveryViewModel(couponStore: ServiceContainer.container.resolve(CouponStore.self)!)
+        //shawn remove this
+        try viewModel.addPackage(text: "PKG3 175 100 OFR003")
+        //shawn remove this
 
         //----------------------------------------
         // MARK: - Menu Selection
@@ -42,7 +49,7 @@ struct CourierService: ParsableCommand {
             throw AppError.invalidBaseDeliveryCost
         }
 
-        print()
+        print("")
 
         //----------------------------------------
         // MARK: - Package Number
@@ -72,12 +79,12 @@ struct CourierService: ParsableCommand {
             } catch {
                 if let appError = error as? AppError {
                     print(appError.errorDescription)
-                    print()
+                    print("")
                 }
                 continue
             }
 
-            print()
+            print("")
         }
 
         print("----------------------------------------")
@@ -85,7 +92,7 @@ struct CourierService: ParsableCommand {
         print("----------------------------------------")
         switch menu {
         case .cost:
-            print(viewModel.getPackageOutput(baseDeliveryCost: baseDeliveryCost, withTime: false))
+            print(viewModel.getPackageTotalDeliveryCostOutput(baseDeliveryCost: baseDeliveryCost))
 
         case .time:
 
