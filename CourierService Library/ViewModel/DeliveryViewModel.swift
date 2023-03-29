@@ -6,17 +6,14 @@ public class DeliveryViewModel: BaseViewModel {
     // MARK:- Initialization
     //----------------------------------------
 
-    public init(couponStore: CouponStore) {
+    public init(couponStore: CouponStore, vehicleStore: VehicleStore) {
         self.couponStore = couponStore
+        self.vehicleStore = vehicleStore
     }
 
     //----------------------------------------
     // MARK: - Actions
     //----------------------------------------
-
-    public func getPackages() -> [Package] {
-        return packages
-    }
 
     public func addPackage(text: String?) throws {
         // Split the text using a space " "
@@ -28,6 +25,10 @@ public class DeliveryViewModel: BaseViewModel {
         var weightInKG: Double?
         var distanceInKM: Double?
         var offerCode: String?
+
+        if id.isEmpty {
+            throw AppError.invalidPackageID
+        }
 
         if packages.contains(where: { $0.id == id }) {
             throw AppError.invalidPackageWithSameID
@@ -56,31 +57,35 @@ public class DeliveryViewModel: BaseViewModel {
         }
     }
 
-    public func calculateFinalDeliveryCost(baseDeliveryCost: Double, package: Package) -> Double {
-        let totalCost = getTotalCost(baseDeliveryCost: baseDeliveryCost, package: package)
-        let discountedCost = getDiscountedCost(baseDeliveryCost: baseDeliveryCost, package: package)
-        let finalCost = totalCost - discountedCost
-
-        return finalCost
-    }
-
-    public func calculateDiscountedDeliveryCost(baseDeliveryCost: Double, package: Package) -> Double {
-        return getDiscountedCost(baseDeliveryCost: baseDeliveryCost, package: package)
-    }
-
     private func getTotalCost(baseDeliveryCost: Double, package: Package) -> Double {
         let totalCost = baseDeliveryCost + (package.weightInKG * weightChargedRate) + (package.distanceInKM * distanceChargedRate)
-
         return totalCost
     }
 
     private func getDiscountedCost(baseDeliveryCost: Double, package: Package) -> Double {
         let discountPercent = couponStore.checkForDiscountPercent(offerCode: package.offerCode ?? "", weightInKG: package.weightInKG, distanceInKM: package.distanceInKM)
 
-        let totalCost = baseDeliveryCost + (package.weightInKG * weightChargedRate) + (package.distanceInKM * distanceChargedRate)
+        let totalCost = getTotalCost(baseDeliveryCost: baseDeliveryCost, package: package)
         let discountedCost = totalCost * discountPercent / 100
 
         return discountedCost
+    }
+
+    public func getPackageTotalDeliveryCostOutput(baseDeliveryCost: Double) -> String {
+        var answer = ""
+
+        packages.forEach { package in
+            let discountedCost = getDiscountedCost(baseDeliveryCost: baseDeliveryCost, package: package)
+            let finalCost = getTotalCost(baseDeliveryCost: baseDeliveryCost, package: package) - discountedCost
+
+            answer += "\(package.id) \(discountedCost.removeDecimalIfNeededToString() ?? "") \(finalCost.removeDecimalIfNeededToString() ?? "")"
+
+            if package != packages.last {
+                answer += "\n"
+            }
+        }
+
+        return answer.isEmpty ? "N/A" : answer
     }
 
     //----------------------------------------
@@ -90,6 +95,8 @@ public class DeliveryViewModel: BaseViewModel {
     private var packages: [Package] = []
 
     private let couponStore: CouponStore
+
+    private let vehicleStore: VehicleStore
 
     private let weightChargedRate = 10.0
 
