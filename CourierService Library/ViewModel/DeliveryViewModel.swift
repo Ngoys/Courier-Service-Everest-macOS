@@ -9,14 +9,6 @@ public class DeliveryViewModel: BaseViewModel {
     public init(couponStore: CouponStore, vehicleStore: VehicleStore) {
         self.couponStore = couponStore
         self.vehicleStore = vehicleStore
-        super.init()
-
-        self.packages = [
-            Package(id: "PKG1", weightInKG: 5, distanceInKM: 5, offerCode: "OFR001"),
-            Package(id: "PKG2", weightInKG: 15, distanceInKM: 5, offerCode: "OFR002"),
-            Package(id: "PKG3", weightInKG: 10, distanceInKM: 100, offerCode: "OFR003"),
-        ]
-        print(getPackageTotalDeliveryCostOutput(baseDeliveryCost: 100))
     }
 
     //----------------------------------------

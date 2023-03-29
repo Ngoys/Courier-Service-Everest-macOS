@@ -20,10 +20,6 @@ struct CourierService: ParsableCommand {
     //----------------------------------------
 
     mutating func run() throws {
-        //shawn remove this
-        try viewModel.addPackage(text: "PKG3 175 100 OFR003")
-        //shawn remove this
-
         //----------------------------------------
         // MARK: - Menu Selection
         //----------------------------------------

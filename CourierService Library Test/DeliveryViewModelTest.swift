@@ -26,6 +26,11 @@ class DeliveryViewModelTest: BaseTest {
     //----------------------------------------
 
     func testAddPackage() {
-        
+        setupViewModel()
+
+        XCTAssertNoThrow(try viewModel.addPackage(text: "PKG1 5 5 OFR001"))
+        XCTAssertThrowsError(try viewModel.addPackage(text: "PKG1 5 5 OFR001")) { error in
+            XCTAssertEqual(error as? AppError, AppError.invalidPackageWithSameID)
+        }
     }
 }
