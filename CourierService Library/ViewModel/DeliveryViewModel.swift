@@ -26,6 +26,10 @@ public class DeliveryViewModel: BaseViewModel {
         var distanceInKM: Double?
         var offerCode: String?
 
+        if id.isEmpty {
+            throw AppError.invalidPackageID
+        }
+
         if packages.contains(where: { $0.id == id }) {
             throw AppError.invalidPackageWithSameID
         }

@@ -32,6 +32,7 @@ class VehicleStoreTest: BaseTest {
         let vehicles = store.getVehicle(count: count)
         XCTAssertEqual(vehicles.count, count)
 
-        XCTAssertEqual(vehicles.last?.id, "99")
+        XCTAssertEqual(vehicles.first?.id, "1")
+        XCTAssertEqual(vehicles.last?.id, "100")
     }
 }

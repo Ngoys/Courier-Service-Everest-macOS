@@ -6,6 +6,7 @@ public enum AppError: Error, Equatable {
     case invalidPackageNumber
     case packageNumberLessThan1
     case invalidPackageWithSameID
+    case invalidPackageID
     case invalidWeightInKG
     case invalidDistanceInKM
     case numberOfVehiclesLessThan1
@@ -31,7 +32,10 @@ public enum AppError: Error, Equatable {
             return "no_of_packages must be more than 0"
 
         case .invalidPackageWithSameID:
-            return "Cannot have package with same ID"
+            return "Cannot add package with same ID as the previously added ones"
+
+        case .invalidPackageID:
+            return "Invalid pkg_id1"
 
         case .invalidWeightInKG:
             return "Invalid pkg_weight_in_kg input, input must be in digit"

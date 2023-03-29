@@ -7,6 +7,6 @@ public class VehicleStore: BaseStore {
     //----------------------------------------
 
     public func getVehicle(count: Int) -> [Vehicle] {
-        return (0..<count).map { Vehicle(id: String($0) ) }
+        return (0..<count).map { Vehicle(id: String($0 + 1) ) }
     }
 }

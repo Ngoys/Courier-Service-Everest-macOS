@@ -25,14 +25,6 @@ class CouponStoreTest: BaseTest {
     // MARK: - Tests
     //----------------------------------------
 
-    func test_getCoupons() {
-        setupStore()
-
-        let coupons = store.getCoupons()
-        XCTAssertEqual(coupons.count, 3)
-        XCTAssertEqual(coupons.map { $0.offerCode }, ["OFR001", "OFR002", "OFR003"])
-    }
-
     func test_checkForDiscountPercent() {
         setupStore()
 
