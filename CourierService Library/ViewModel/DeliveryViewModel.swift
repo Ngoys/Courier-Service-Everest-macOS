@@ -30,7 +30,7 @@ public class DeliveryViewModel: BaseViewModel {
         var packagesCopy = self.packages
         packagesCopy.forEach { package in
             let pair = getHeaviestPackagesPair(packages: packagesCopy, maxCarriableWeightInKG: 200)
-            print(pair)
+            print("Result \(pair.map { $0.id })")
             pair.forEach { package in
                 packagesCopy.removeAll(where: { $0 == package })
             }
@@ -152,12 +152,16 @@ public class DeliveryViewModel: BaseViewModel {
             print("populatePackagesPairs - firstPackagesPairWeightInKG: \(firstPackagesPairWeightInKG)")
             print("populatePackagesPairs - populatingPackagesWeightInKG: \(populatingPackagesWeightInKG)\(populatingPackagesWeightInKG > maxCarriableWeightInKG ? ", invalid, cannot more than \(maxCarriableWeightInKG)" : "")")
 
-            if populatingPackagesWeightInKG > maxCarriableWeightInKG || index == packages.count - 1 {
+            if populatingPackagesWeightInKG > maxCarriableWeightInKG || index == packages.count {
                 if populatingPackagesWeightInKG > firstPackagesPairWeightInKG && populatingPackagesWeightInKG <= maxCarriableWeightInKG {
+
+                    if populatingPackagesWeightInKG > firstPackagesPairWeightInKG {
+                        packagesPairs.removeAll()
+                    }
 
                     packagesPairs.append(populatingPackages)
                 }
-                print((index == packages.count - 1 ? "REACH END OF LOOP" : "INVALID CASE") + "==============")
+                print((index == packages.count ? "REACH END OF LOOP" : "INVALID CASE") + "==============")
                 return packagesPairs
             }
 
@@ -169,6 +173,7 @@ public class DeliveryViewModel: BaseViewModel {
 
             print("")
             print("populatePackagesPairs - populatingPackages 1st - index: \(index) newlyAddOnPackages: \(newlyAddOnPackages.map { $0.id }) weightInKG: \(newlyAddOnPackages.map { $0.weightInKG })")
+
             packagesPairs = populatePackagesPairs(index: nextIndex, populatingPackages: newlyAddOnPackages)
 
             print("")
@@ -176,7 +181,8 @@ public class DeliveryViewModel: BaseViewModel {
             print("populatePackagesPairs - populatingPackages 2nd - index: \(index) populatingPackages: \(populatingPackages.map { $0.id }) weightInKG: \(populatingPackages.map { $0.weightInKG })")
 
             packagesPairs = populatePackagesPairs(index: nextIndex, populatingPackages: populatingPackages)
-            
+
+            print("populatePackagesPairs - packagesPairs \(packagesPairs.flatMap { $0.map { $0.id }})")
             return packagesPairs
         }
 
