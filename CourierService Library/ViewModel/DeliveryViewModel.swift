@@ -18,14 +18,23 @@ public class DeliveryViewModel: BaseViewModel {
         //        ]
         //        print(getPackageTotalDeliveryCostOutput(baseDeliveryCost: 100))
 
-//        self.packages = [
-//            Package(id: "PKG1", weightInKG: 50, distanceInKM: 30, offerCode: "OFR001"),
-//            Package(id: "PKG2", weightInKG: 75, distanceInKM: 125, offerCode: "OFR008"),
-//            Package(id: "PKG3", weightInKG: 175, distanceInKM: 100, offerCode: "OFR003"),
-//            Package(id: "PKG4", weightInKG: 110, distanceInKM: 60, offerCode: "OFR002"),
-//            Package(id: "PKG5", weightInKG: 155, distanceInKM: 95, offerCode: "NA")
-//        ]
-//        print(getPackageTotalDeliveryOutput(baseDeliveryCost: 100, numberOfVehicles: 2, maxSpeed: 70, maxCarriableWeightInKG: 200))
+        self.packages = [
+            Package(id: "PKG1", weightInKG: 50, distanceInKM: 30, offerCode: "OFR001"),
+            Package(id: "PKG2", weightInKG: 75, distanceInKM: 125, offerCode: "OFR008"),
+            Package(id: "PKG3", weightInKG: 175, distanceInKM: 100, offerCode: "OFR003"),
+            Package(id: "PKG4", weightInKG: 110, distanceInKM: 60, offerCode: "OFR002"),
+            Package(id: "PKG5", weightInKG: 155, distanceInKM: 95, offerCode: "NA")
+        ]
+        //        print(getPackageTotalDeliveryOutput(baseDeliveryCost: 100, numberOfVehicles: 2, maxSpeed: 70, maxCarriableWeightInKG: 200))
+
+        var packagesCopy = self.packages
+        packagesCopy.forEach { package in
+            let pair = getHeaviestPackagesPair(packages: packagesCopy, maxCarriableWeightInKG: 200)
+            print(pair)
+            pair.forEach { package in
+                packagesCopy.removeAll(where: { $0 == package })
+            }
+        }
     }
 
     //----------------------------------------
@@ -130,6 +139,17 @@ public class DeliveryViewModel: BaseViewModel {
         let vehicles = vehicleStore.getVehicle(count: numberOfVehicles)
 
         return timeCosts
+    }
+
+    public func getHeaviestPackagesPair(packages: [Package], maxCarriableWeightInKG: Double) -> [Package] {
+        var packagesPairs: [[Package]] = []
+        packagesPairs = populatePackagesPairs(populatingPackages: [])
+
+        func populatePackagesPairs(populatingPackages: [Package]) -> [[Package]] {
+            return packagesPairs
+        }
+
+        return packagesPairs.first ?? []
     }
 
     //----------------------------------------
