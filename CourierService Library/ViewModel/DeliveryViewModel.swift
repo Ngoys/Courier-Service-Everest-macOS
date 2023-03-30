@@ -149,10 +149,19 @@ public class DeliveryViewModel: BaseViewModel {
             let firstPackagesPairWeightInKG = (packagesPairs.first ?? []).reduce(0) { $0 + $1.weightInKG }
             let populatingPackagesWeightInKG = populatingPackages.reduce(0) { $0 + $1.weightInKG }
 
-            if populatingPackagesWeightInKG > maxCarriableWeightInKG {
+            print("populatePackagesPairs - firstPackagesPairWeightInKG: \(firstPackagesPairWeightInKG)")
+            print("populatePackagesPairs - populatingPackagesWeightInKG: \(populatingPackagesWeightInKG)\(populatingPackagesWeightInKG > maxCarriableWeightInKG ? ", invalid, cannot more than \(maxCarriableWeightInKG)" : "")")
+
+            if populatingPackagesWeightInKG > maxCarriableWeightInKG || index == packages.count {
                 if populatingPackagesWeightInKG > firstPackagesPairWeightInKG && populatingPackagesWeightInKG <= maxCarriableWeightInKG {
+
+                    if populatingPackagesWeightInKG > firstPackagesPairWeightInKG {
+                        packagesPairs.removeAll()
+                    }
+
                     packagesPairs.append(populatingPackages)
                 }
+                print((index == packages.count ? "REACH END OF LOOP" : "INVALID CASE") + "==============")
                 return packagesPairs
             }
 
@@ -162,6 +171,8 @@ public class DeliveryViewModel: BaseViewModel {
             var newlyAddOnPackages = populatingPackages
             newlyAddOnPackages.append(packages[index])
 
+            print("")
+            print("populatePackagesPairs - populatingPackages 1st - index: \(index) newlyAddOnPackages: \(newlyAddOnPackages.map { $0.id }) weightInKG: \(newlyAddOnPackages.map { $0.weightInKG })")
             packagesPairs = populatePackagesPairs(index: nextIndex, populatingPackages: newlyAddOnPackages)
 
             return packagesPairs
