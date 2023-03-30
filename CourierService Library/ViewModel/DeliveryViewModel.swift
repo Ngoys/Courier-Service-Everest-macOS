@@ -16,7 +16,7 @@ public class DeliveryViewModel: BaseViewModel {
         //            Package(id: "PKG2", weightInKG: 15, distanceInKM: 5, offerCode: "OFR002"),
         //            Package(id: "PKG3", weightInKG: 10, distanceInKM: 100, offerCode: "OFR003"),
         //        ]
-        //        print(getPackageTotalDeliveryCostOutput(baseDeliveryCost: 100))
+        //        logger.debugLog(getPackageTotalDeliveryCostOutput(baseDeliveryCost: 100))
 
         self.packages = [
             Package(id: "PKG1", weightInKG: 50, distanceInKM: 30, offerCode: "OFR001"),
@@ -25,7 +25,7 @@ public class DeliveryViewModel: BaseViewModel {
             Package(id: "PKG4", weightInKG: 110, distanceInKM: 60, offerCode: "OFR002"),
             Package(id: "PKG5", weightInKG: 155, distanceInKM: 95, offerCode: "NA")
         ]
-        //        print(getPackageTotalDeliveryOutput(baseDeliveryCost: 100, numberOfVehicles: 2, maxSpeed: 70, maxCarriableWeightInKG: 200))
+        logger.debugLog(getPackageTotalDeliveryOutput(baseDeliveryCost: 100, numberOfVehicles: 2, maxSpeed: 70, maxCarriableWeightInKG: 200))
     }
 
     //----------------------------------------
@@ -137,9 +137,9 @@ public class DeliveryViewModel: BaseViewModel {
                 continue
             }
 
-            print("\n----------------------------------------")
-            print("getHeaviestPackagesPairCallTimesIndex: \(getHeaviestPackagesPairCallTimesIndex), now left \(packagesCopy.map { $0.id} )")
-            print("----------------------------------------")
+            logger.debugLog("\n----------------------------------------")
+            logger.debugLog("getHeaviestPackagesPairCallTimesIndex: \(getHeaviestPackagesPairCallTimesIndex), now left \(packagesCopy.map { $0.id} )")
+            logger.debugLog("----------------------------------------")
             let packagesPair = getHeaviestPackagesPair(packages: packagesCopy, maxCarriableWeightInKG: maxCarriableWeightInKG)
             getHeaviestPackagesPairCallTimesIndex += 1
 
@@ -159,7 +159,7 @@ public class DeliveryViewModel: BaseViewModel {
             // https://stackoverflow.com/a/32938861
             // Remove all packagesPair packages from packagesCopy, as the packages are delivered
             packagesCopy = packagesCopy.filter { packagesPair.contains($0) == false }
-            print("getTimeCost - removed \(packagesPair.map { $0.id }), now left \(packagesCopy.map { $0.id} )")
+            logger.debugLog("getTimeCost - removed \(packagesPair.map { $0.id }), now left \(packagesCopy.map { $0.id} )")
         }
 
         return timeCosts
@@ -173,8 +173,8 @@ public class DeliveryViewModel: BaseViewModel {
             let firstPackagesPairWeightInKG = (packagesPairs.first ?? []).reduce(0) { $0 + $1.weightInKG }
             let populatingPackagesWeightInKG = populatingPackages.reduce(0) { $0 + $1.weightInKG }
 
-            print("populatePackagesPairs - firstPackagesPairWeightInKG: \(firstPackagesPairWeightInKG)")
-            print("populatePackagesPairs - populatingPackagesWeightInKG: \(populatingPackagesWeightInKG)\(populatingPackagesWeightInKG > maxCarriableWeightInKG ? ", invalid, cannot more than \(maxCarriableWeightInKG)" : "")")
+            logger.debugLog("populatePackagesPairs - firstPackagesPairWeightInKG: \(firstPackagesPairWeightInKG)")
+            logger.debugLog("populatePackagesPairs - populatingPackagesWeightInKG: \(populatingPackagesWeightInKG)\(populatingPackagesWeightInKG > maxCarriableWeightInKG ? ", invalid, cannot more than \(maxCarriableWeightInKG)" : "")")
 
             if populatingPackagesWeightInKG > maxCarriableWeightInKG || index == packages.count {
                 if populatingPackagesWeightInKG > firstPackagesPairWeightInKG && populatingPackagesWeightInKG <= maxCarriableWeightInKG {
@@ -185,7 +185,7 @@ public class DeliveryViewModel: BaseViewModel {
 
                     packagesPairs.append(populatingPackages)
                 }
-                print((index == packages.count ? "REACH END OF LOOP" : "INVALID CASE") + "==============")
+                logger.debugLog((index == packages.count ? "REACH END OF LOOP" : "INVALID CASE") + "==============")
                 return packagesPairs
             }
 
@@ -195,18 +195,18 @@ public class DeliveryViewModel: BaseViewModel {
             var newlyAddOnPackages = populatingPackages
             newlyAddOnPackages.append(packages[index])
 
-            print("")
-            print("populatePackagesPairs - populatingPackages 1st - index: \(index) newlyAddOnPackages: \(newlyAddOnPackages.map { $0.id }) weightInKG: \(newlyAddOnPackages.map { $0.weightInKG })")
+            logger.debugLog("")
+            logger.debugLog("populatePackagesPairs - populatingPackages 1st - index: \(index) newlyAddOnPackages: \(newlyAddOnPackages.map { $0.id }) weightInKG: \(newlyAddOnPackages.map { $0.weightInKG })")
 
             packagesPairs = populatePackagesPairs(index: nextIndex, populatingPackages: newlyAddOnPackages)
 
-            print("")
-            print("populatePackagesPairs - starting a new loop by removing the last package")
-            print("populatePackagesPairs - populatingPackages 2nd - index: \(index) populatingPackages: \(populatingPackages.map { $0.id }) weightInKG: \(populatingPackages.map { $0.weightInKG })")
+            logger.debugLog("")
+            logger.debugLog("populatePackagesPairs - starting a new loop by removing the last package")
+            logger.debugLog("populatePackagesPairs - populatingPackages 2nd - index: \(index) populatingPackages: \(populatingPackages.map { $0.id }) weightInKG: \(populatingPackages.map { $0.weightInKG })")
 
             packagesPairs = populatePackagesPairs(index: nextIndex, populatingPackages: populatingPackages)
 
-            print("populatePackagesPairs - packagesPairs \(packagesPairs.flatMap { $0.map { $0.id }})")
+            logger.debugLog("populatePackagesPairs - packagesPairs \(packagesPairs.flatMap { $0.map { $0.id }})")
             return packagesPairs
         }
 
