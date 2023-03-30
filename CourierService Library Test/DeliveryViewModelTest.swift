@@ -65,13 +65,21 @@ class DeliveryViewModelTest: BaseTest {
 
         let baseDeliveryCost = 100.0
 
-        XCTAssertNoThrow(try viewModel.addPackage(text: "PKG1 5 5 OFR001"))
+        XCTAssertNoThrow(try viewModel.addPackage(text: "PKG1         5      5      OFR001"))
         XCTAssertNoThrow(try viewModel.addPackage(text: "PKG2 15 5 OFR002"))
         XCTAssertNoThrow(try viewModel.addPackage(text: "PKG3 10 100 OFR003"))
-        XCTAssertEqual(viewModel.getPackageTotalDeliveryCostOutput(baseDeliveryCost: baseDeliveryCost), """
+        XCTAssertEqual(viewModel.getPackageTotalDeliveryOutput(baseDeliveryCost: baseDeliveryCost), """
                        PKG1 0 175
                        PKG2 0 275
                        PKG3 35 665
                        """)
+
+        //----------------------------------------
+        // MARK: - Reset
+        //----------------------------------------
+        setupViewModel()
+        XCTAssertEqual(viewModel.getPackageTotalDeliveryOutput(baseDeliveryCost: baseDeliveryCost), "N/A")
     }
+
+    // shawn more unit test here...
 }

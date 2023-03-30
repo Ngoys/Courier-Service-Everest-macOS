@@ -45,5 +45,7 @@ class CouponStoreTest: BaseTest {
         XCTAssertEqual(store.checkForDiscountPercent(offerCode: "OFR003", weightInKG: 10, distanceInKM: 50), 5)
         XCTAssertEqual(store.checkForDiscountPercent(offerCode: "OFR003", weightInKG: 10, distanceInKM: 50), 5)
         XCTAssertEqual(store.checkForDiscountPercent(offerCode: "OFR003", weightInKG: 150, distanceInKM: 250), 5)
+
+        XCTAssertEqual(store.checkForDiscountPercent(offerCode: "", weightInKG: 0, distanceInKM: 0), 0)
     }
 }

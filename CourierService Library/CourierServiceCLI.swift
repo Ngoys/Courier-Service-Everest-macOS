@@ -10,16 +10,25 @@ public struct CourierServiceCLI: ParsableCommand {
     public init() { }
 
     //----------------------------------------
+    // MARK:- View model
+    //----------------------------------------
+
+    public var viewModel: DeliveryViewModel {
+        return DeliveryViewModel(couponStore: ServiceContainer.container.resolve(CouponStore.self)!,
+                                 vehicleStore: ServiceContainer.container.resolve(VehicleStore.self)!)
+    }
+
+    //----------------------------------------
     // MARK: - Actions
     //----------------------------------------
 
     public mutating func run() throws {
-        viewModel.getPackageTotalDeliveryCostOutput(baseDeliveryCost: 100)//remove it shawn
+        viewModel.getPackageTotalDeliveryOutput(baseDeliveryCost: 100)//remove it shawn
         //----------------------------------------
         // MARK: - Menu Selection
         //----------------------------------------
         print("Menu option ('cost' or 'time'):", terminator: " ")
-        guard let menuString = readLine(), let menu = Menu(rawValue: menuString) else {
+        guard let menuString = readLine(), let menu = Menu(rawValue: menuString.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)) else {
             print(AppError.invalidMenu.errorDescription)
             throw AppError.invalidMenu
         }
@@ -78,12 +87,12 @@ public struct CourierServiceCLI: ParsableCommand {
             print("")
         }
 
-        print("----------------------------------------")
-        print("Answer")
-        print("----------------------------------------")
         switch menu {
         case .cost:
-            print(viewModel.getPackageTotalDeliveryCostOutput(baseDeliveryCost: baseDeliveryCost))
+            print("----------------------------------------")
+            print("Answer")
+            print("----------------------------------------")
+            print(viewModel.getPackageTotalDeliveryOutput(baseDeliveryCost: baseDeliveryCost))
 
         case .time:
 
@@ -100,11 +109,11 @@ public struct CourierServiceCLI: ParsableCommand {
                         if items.indices.contains(2), let maxCarriableWeight = Double(items[2]) {
                             isAcceptingInput = false
 
-
-
-
-
-
+                            print("")
+                            print("----------------------------------------")
+                            print("Answer")
+                            print("----------------------------------------")
+                            print(viewModel.getPackageTotalDeliveryOutput(baseDeliveryCost: baseDeliveryCost, numberOfVehicles: numberOfVehicles, maxSpeed: maxSpeed, maxCarriableWeightInKG: maxCarriableWeight))
                         } else {
                             print(AppError.invalidMaxCarriableWeight.errorDescription)
                         }
@@ -117,13 +126,4 @@ public struct CourierServiceCLI: ParsableCommand {
             }
         }
     }
-
-    //----------------------------------------
-    // MARK: - Internals
-    //----------------------------------------
-
-    private lazy var viewModel: DeliveryViewModel = {
-        return DeliveryViewModel(couponStore: ServiceContainer.container.resolve(CouponStore.self)!,
-                                 vehicleStore: ServiceContainer.container.resolve(VehicleStore.self)!)
-    }()
 }
