@@ -9,6 +9,23 @@ public class DeliveryViewModel: BaseViewModel {
     public init(couponStore: CouponStore, vehicleStore: VehicleStore) {
         self.couponStore = couponStore
         self.vehicleStore = vehicleStore
+        super.init()
+//shawn delete this
+        //        self.packages = [
+        //            Package(id: "PKG1", weightInKG: 5, distanceInKM: 5, offerCode: "OFR001"),
+        //            Package(id: "PKG2", weightInKG: 15, distanceInKM: 5, offerCode: "OFR002"),
+        //            Package(id: "PKG3", weightInKG: 10, distanceInKM: 100, offerCode: "OFR003"),
+        //        ]
+        //        logger.debugLog(getPackageTotalDeliveryCostOutput(baseDeliveryCost: 100))
+
+        self.packages = [
+            Package(id: "PKG1", weightInKG: 50, distanceInKM: 30, offerCode: "OFR001"),
+            Package(id: "PKG2", weightInKG: 75, distanceInKM: 125, offerCode: "OFR008"),
+            Package(id: "PKG3", weightInKG: 175, distanceInKM: 100, offerCode: "OFR003"),
+            Package(id: "PKG4", weightInKG: 110, distanceInKM: 60, offerCode: "OFR002"),
+            Package(id: "PKG5", weightInKG: 155, distanceInKM: 95, offerCode: "NA")
+        ]
+        logger.debugLog(getPackageTotalDeliveryOutput(baseDeliveryCost: 100, numberOfVehicles: 2, maxSpeed: 70, maxCarriableWeightInKG: 200))
     }
 
     //----------------------------------------
@@ -57,12 +74,12 @@ public class DeliveryViewModel: BaseViewModel {
         }
     }
 
-    private func getTotalCost(baseDeliveryCost: Double, package: Package) -> Double {
+    public func getTotalCost(baseDeliveryCost: Double, package: Package) -> Double {
         let totalCost = baseDeliveryCost + (package.weightInKG * weightChargedRate) + (package.distanceInKM * distanceChargedRate)
         return totalCost
     }
 
-    private func getDiscountedCost(baseDeliveryCost: Double, package: Package) -> Double {
+    public func getDiscountedCost(baseDeliveryCost: Double, package: Package) -> Double {
         let discountPercent = couponStore.checkForDiscountPercent(offerCode: package.offerCode ?? "", weightInKG: package.weightInKG, distanceInKM: package.distanceInKM)
 
         let totalCost = getTotalCost(baseDeliveryCost: baseDeliveryCost, package: package)
@@ -71,7 +88,7 @@ public class DeliveryViewModel: BaseViewModel {
         return discountedCost
     }
 
-    public func getPackageTotalDeliveryCostOutput(baseDeliveryCost: Double) -> String {
+    public func getPackageTotalDeliveryOutput(baseDeliveryCost: Double) -> String {
         var answer = ""
 
         packages.forEach { package in
@@ -86,6 +103,114 @@ public class DeliveryViewModel: BaseViewModel {
         }
 
         return answer.isEmpty ? "N/A" : answer
+    }
+
+    public func getPackageTotalDeliveryOutput(baseDeliveryCost: Double, numberOfVehicles: Int, maxSpeed: Double, maxCarriableWeightInKG: Double) -> String {
+        let timeCosts = getTimeCost(numberOfVehicles: numberOfVehicles, maxSpeed: maxSpeed, maxCarriableWeightInKG: maxCarriableWeightInKG)
+        var answer = ""
+
+        packages.forEach { package in
+            let discountedCost = getDiscountedCost(baseDeliveryCost: baseDeliveryCost, package: package)
+            let finalCost = getTotalCost(baseDeliveryCost: baseDeliveryCost, package: package) - discountedCost
+            let timeCost = timeCosts[package.id]
+
+            answer += "\(package.id) \(discountedCost.removeDecimalIfNeededToString() ?? "") \(finalCost.removeDecimalIfNeededToString() ?? "") \((timeCost == nil) ? "N/A" : "\(timeCost!)")"
+
+            if package != packages.last {
+                answer += "\n"
+            }
+        }
+
+        return answer.isEmpty ? "N/A" : answer
+    }
+
+    public func getTimeCost(numberOfVehicles: Int, maxSpeed: Double, maxCarriableWeightInKG: Double) -> [String: Double] {
+        // Return [package.id: timeCost]
+        var timeCosts: [String: Double] = [:]
+        let vehicles = vehicleStore.getVehicle(count: numberOfVehicles)
+
+        var packagesCopy = self.packages
+        var getHeaviestPackagesPairCallTimesIndex = 0
+
+        for _ in packagesCopy where packagesCopy.isEmpty == false { // Need to use this for loop synxtax for 'continue' keyword
+            guard let earliestAvailableVehicle = vehicles.sorted(by: { $0.availableTime < $1.availableTime }).first else {
+                continue
+            }
+
+            logger.debugLog("\n----------------------------------------")
+            logger.debugLog("getHeaviestPackagesPairCallTimesIndex: \(getHeaviestPackagesPairCallTimesIndex), now left \(packagesCopy.map { $0.id} )")
+            logger.debugLog("----------------------------------------")
+            let packagesPair = getHeaviestPackagesPair(packages: packagesCopy, maxCarriableWeightInKG: maxCarriableWeightInKG)
+            getHeaviestPackagesPairCallTimesIndex += 1
+
+            let initialAvailableTime = earliestAvailableVehicle.availableTime
+            let fromLargestDistancePackages = packagesPair.sorted { $0.distanceInKM > $1.distanceInKM }
+
+            fromLargestDistancePackages.forEach { package in
+                let timeToDeliver = (package.distanceInKM / maxSpeed).rounded(toPlaces: 2)
+                let timeCost = (initialAvailableTime + timeToDeliver).rounded(toPlaces: 2)
+
+                if package == packagesPair.first {
+                    earliestAvailableVehicle.setAvailableTime(earliestAvailableVehicle.availableTime + (2 * timeToDeliver))
+                }
+                timeCosts[package.id] = timeCost
+            }
+
+            // https://stackoverflow.com/a/32938861
+            // Remove all packagesPair packages from packagesCopy, as the packages are delivered
+            packagesCopy = packagesCopy.filter { packagesPair.contains($0) == false }
+            logger.debugLog("getTimeCost - removed \(packagesPair.map { $0.id }), now left \(packagesCopy.map { $0.id} )")
+        }
+
+        return timeCosts
+    }
+
+    public func getHeaviestPackagesPair(packages: [Package], maxCarriableWeightInKG: Double) -> [Package] {
+        var packagesPairs: [[Package]] = []
+        packagesPairs = populatePackagesPairs(index: packagesPairs.count, populatingPackages: [])
+
+        func populatePackagesPairs(index: Int, populatingPackages: [Package]) -> [[Package]] {
+            let firstPackagesPairWeightInKG = (packagesPairs.first ?? []).reduce(0) { $0 + $1.weightInKG }
+            let populatingPackagesWeightInKG = populatingPackages.reduce(0) { $0 + $1.weightInKG }
+
+            logger.debugLog("populatePackagesPairs - firstPackagesPairWeightInKG: \(firstPackagesPairWeightInKG)")
+            logger.debugLog("populatePackagesPairs - populatingPackagesWeightInKG: \(populatingPackagesWeightInKG)\(populatingPackagesWeightInKG > maxCarriableWeightInKG ? ", invalid, cannot more than \(maxCarriableWeightInKG)" : "")")
+
+            if populatingPackagesWeightInKG > maxCarriableWeightInKG || index == packages.count {
+                if populatingPackagesWeightInKG > firstPackagesPairWeightInKG && populatingPackagesWeightInKG <= maxCarriableWeightInKG {
+
+                    if populatingPackagesWeightInKG > firstPackagesPairWeightInKG {
+                        packagesPairs.removeAll()
+                    }
+
+                    packagesPairs.append(populatingPackages)
+                }
+                logger.debugLog((index == packages.count ? "REACH END OF LOOP" : "INVALID CASE") + "==============")
+                return packagesPairs
+            }
+
+            // Recursive
+            let nextIndex = index + 1
+
+            var newlyAddOnPackages = populatingPackages
+            newlyAddOnPackages.append(packages[index])
+
+            logger.debugLog("")
+            logger.debugLog("populatePackagesPairs - populatingPackages 1st - index: \(index) newlyAddOnPackages: \(newlyAddOnPackages.map { $0.id }) weightInKG: \(newlyAddOnPackages.map { $0.weightInKG })")
+
+            packagesPairs = populatePackagesPairs(index: nextIndex, populatingPackages: newlyAddOnPackages)
+
+            logger.debugLog("")
+            logger.debugLog("populatePackagesPairs - starting a new loop by removing the last package")
+            logger.debugLog("populatePackagesPairs - populatingPackages 2nd - index: \(index) populatingPackages: \(populatingPackages.map { $0.id }) weightInKG: \(populatingPackages.map { $0.weightInKG })")
+
+            packagesPairs = populatePackagesPairs(index: nextIndex, populatingPackages: populatingPackages)
+
+            logger.debugLog("populatePackagesPairs - packagesPairs \(packagesPairs.flatMap { $0.map { $0.id }})")
+            return packagesPairs
+        }
+
+        return packagesPairs.first ?? []
     }
 
     //----------------------------------------

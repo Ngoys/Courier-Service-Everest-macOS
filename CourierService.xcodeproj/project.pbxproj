@@ -18,16 +18,17 @@
 		C2E59A6629D051580042828A /* Coupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A6529D051580042828A /* Coupon.swift */; };
 		C2E59A6829D051880042828A /* BaseStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A6729D051880042828A /* BaseStore.swift */; };
 		C2E59A6C29D052720042828A /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A6B29D052720042828A /* BaseViewModel.swift */; };
-		C2E59A6F29D052CB0042828A /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = C2E59A6E29D052CB0042828A /* Swinject */; };
 		C2E59A7329D052FC0042828A /* ServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2E59A7229D052FC0042828A /* ServiceContainer.swift */; };
+		C2F6642829D40798005C4FEB /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = C22179D229D173B900F28247 /* Swinject */; };
 		C2F6642C29D4131B005C4FEB /* VehicleStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F6642B29D4131B005C4FEB /* VehicleStore.swift */; };
 		C2F6642E29D413B1005C4FEB /* Vehicle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F6642D29D413B1005C4FEB /* Vehicle.swift */; };
-		F04E75DC27CE703F0073AEC2 /* CourierService_Library_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E75DB27CE703F0073AEC2 /* CourierService_Library_Test.swift */; };
-		C2F6642829D40798005C4FEB /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = C22179D229D173B900F28247 /* Swinject */; };
-		C2F6642A29D40994005C4FEB /* VehicleStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F6642929D40994005C4FEB /* VehicleStore.swift */; };
 		C2F6643029D42841005C4FEB /* BaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F6642F29D42841005C4FEB /* BaseTest.swift */; };
 		C2F6643329D428D5005C4FEB /* VehicleStoreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F6643129D428D5005C4FEB /* VehicleStoreTest.swift */; };
 		C2F6643429D428D5005C4FEB /* CouponStoreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F6643229D428D5005C4FEB /* CouponStoreTest.swift */; };
+		C2F6643A29D46851005C4FEB /* CourierServiceCLI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F6643929D46851005C4FEB /* CourierServiceCLI.swift */; };
+		C2F6643C29D4688F005C4FEB /* ArgumentParser in Frameworks */ = {isa = PBXBuildFile; productRef = C2F6643B29D4688F005C4FEB /* ArgumentParser */; };
+		C2F6643E29D64F91005C4FEB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F6643D29D64F91005C4FEB /* Environment.swift */; };
+		C2F6644229D652B3005C4FEB /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2F6644129D652B3005C4FEB /* Logger.swift */; };
 		F04E75DC27CE703F0073AEC2 /* DeliveryViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E75DB27CE703F0073AEC2 /* DeliveryViewModelTest.swift */; };
 		F04E75DD27CE703F0073AEC2 /* libCourierService Library.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F04E75C627CE6F6D0073AEC2 /* libCourierService Library.a */; };
 		F04E75E327CE728E0073AEC2 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E75AD27CE6E6A0073AEC2 /* main.swift */; };
@@ -76,10 +77,12 @@
 		C2E59A7229D052FC0042828A /* ServiceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceContainer.swift; sourceTree = "<group>"; };
 		C2F6642B29D4131B005C4FEB /* VehicleStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleStore.swift; sourceTree = "<group>"; };
 		C2F6642D29D413B1005C4FEB /* Vehicle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vehicle.swift; sourceTree = "<group>"; };
-		C2F6642929D40994005C4FEB /* VehicleStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleStore.swift; sourceTree = "<group>"; };
 		C2F6642F29D42841005C4FEB /* BaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTest.swift; sourceTree = "<group>"; };
 		C2F6643129D428D5005C4FEB /* VehicleStoreTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VehicleStoreTest.swift; sourceTree = "<group>"; };
 		C2F6643229D428D5005C4FEB /* CouponStoreTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CouponStoreTest.swift; sourceTree = "<group>"; };
+		C2F6643929D46851005C4FEB /* CourierServiceCLI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourierServiceCLI.swift; sourceTree = "<group>"; };
+		C2F6643D29D64F91005C4FEB /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		C2F6644129D652B3005C4FEB /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		F04E75AA27CE6E6A0073AEC2 /* CourierService */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CourierService; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04E75AD27CE6E6A0073AEC2 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F04E75C627CE6F6D0073AEC2 /* libCourierService Library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libCourierService Library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,7 +97,6 @@
 			files = (
 				C2E59A3529D008C30042828A /* ArgumentParser in Frameworks */,
 				F04E75E427CE72A00073AEC2 /* libCourierService Library.a in Frameworks */,
-				C2E59A6F29D052CB0042828A /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +105,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C22179D329D173B900F28247 /* Swinject in Frameworks */,
+				C2F6643C29D4688F005C4FEB /* ArgumentParser in Frameworks */,
+				C2F6642829D40798005C4FEB /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				C2E59A5429D0218C0042828A /* Number+Extension.swift */,
+				C2F6644129D652B3005C4FEB /* Logger.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -130,6 +135,7 @@
 			children = (
 				C2E59A7229D052FC0042828A /* ServiceContainer.swift */,
 				C2E59A4F29D019DA0042828A /* AppError.swift */,
+				C2F6643D29D64F91005C4FEB /* Environment.swift */,
 				C2E59A6429D050640042828A /* Store */,
 			);
 			path = Services;
@@ -204,6 +210,7 @@
 		F04E75C727CE6F6D0073AEC2 /* CourierService Library */ = {
 			isa = PBXGroup;
 			children = (
+				C2F6643929D46851005C4FEB /* CourierServiceCLI.swift */,
 				C2E59A6929D051960042828A /* Base */,
 				C2E59A6A29D052440042828A /* ViewModel */,
 				C2E59A5729D022B70042828A /* Services */,
@@ -260,7 +267,6 @@
 			name = CourierService;
 			packageProductDependencies = (
 				C2E59A3429D008C30042828A /* ArgumentParser */,
-				C2E59A6E29D052CB0042828A /* Swinject */,
 			);
 			productName = Example;
 			productReference = F04E75AA27CE6E6A0073AEC2 /* CourierService */;
@@ -281,6 +287,7 @@
 			name = "CourierService Library";
 			packageProductDependencies = (
 				C22179D229D173B900F28247 /* Swinject */,
+				C2F6643B29D4688F005C4FEB /* ArgumentParser */,
 			);
 			productName = "Example Lib";
 			productReference = F04E75C627CE6F6D0073AEC2 /* libCourierService Library.a */;
@@ -376,12 +383,15 @@
 				C2F6642E29D413B1005C4FEB /* Vehicle.swift in Sources */,
 				C2E59A5029D019DA0042828A /* AppError.swift in Sources */,
 				C2E59A5B29D0236F0042828A /* Package.swift in Sources */,
+				C2F6643E29D64F91005C4FEB /* Environment.swift in Sources */,
 				C2E59A6829D051880042828A /* BaseStore.swift in Sources */,
 				C2E59A4E29D018660042828A /* Menu.swift in Sources */,
 				C2E59A5529D0218C0042828A /* Number+Extension.swift in Sources */,
 				C2E59A6C29D052720042828A /* BaseViewModel.swift in Sources */,
 				C2E59A3D29D00ADC0042828A /* DeliveryViewModel.swift in Sources */,
 				C2F6642C29D4131B005C4FEB /* VehicleStore.swift in Sources */,
+				C2F6644229D652B3005C4FEB /* Logger.swift in Sources */,
+				C2F6643A29D46851005C4FEB /* CourierServiceCLI.swift in Sources */,
 				C2E59A6329D050580042828A /* CouponStore.swift in Sources */,
 				C2E59A6629D051580042828A /* Coupon.swift in Sources */,
 				C2E59A7329D052FC0042828A /* ServiceContainer.swift in Sources */,
@@ -696,10 +706,10 @@
 			package = C2E59A3329D008C30042828A /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
 			productName = ArgumentParser;
 		};
-		C2E59A6E29D052CB0042828A /* Swinject */ = {
+		C2F6643B29D4688F005C4FEB /* ArgumentParser */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C2E59A6D29D052CB0042828A /* XCRemoteSwiftPackageReference "Swinject" */;
-			productName = Swinject;
+			package = C2E59A3329D008C30042828A /* XCRemoteSwiftPackageReference "swift-argument-parser" */;
+			productName = ArgumentParser;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
