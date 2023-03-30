@@ -143,9 +143,27 @@ public class DeliveryViewModel: BaseViewModel {
 
     public func getHeaviestPackagesPair(packages: [Package], maxCarriableWeightInKG: Double) -> [Package] {
         var packagesPairs: [[Package]] = []
-        packagesPairs = populatePackagesPairs(populatingPackages: [])
+        packagesPairs = populatePackagesPairs(index: packagesPairs.count, populatingPackages: [])
 
-        func populatePackagesPairs(populatingPackages: [Package]) -> [[Package]] {
+        func populatePackagesPairs(index: Int, populatingPackages: [Package]) -> [[Package]] {
+            let firstPackagesPairWeightInKG = (packagesPairs.first ?? []).reduce(0) { $0 + $1.weightInKG }
+            let populatingPackagesWeightInKG = populatingPackages.reduce(0) { $0 + $1.weightInKG }
+
+            if populatingPackagesWeightInKG > maxCarriableWeightInKG {
+                if populatingPackagesWeightInKG > firstPackagesPairWeightInKG && populatingPackagesWeightInKG <= maxCarriableWeightInKG {
+                    packagesPairs.append(populatingPackages)
+                }
+                return packagesPairs
+            }
+
+            // Recursive
+            let nextIndex = index + 1
+
+            var newlyAddOnPackages = populatingPackages
+            newlyAddOnPackages.append(packages[index])
+
+            packagesPairs = populatePackagesPairs(index: nextIndex, populatingPackages: newlyAddOnPackages)
+
             return packagesPairs
         }
 
