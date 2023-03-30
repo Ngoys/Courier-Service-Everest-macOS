@@ -152,16 +152,12 @@ public class DeliveryViewModel: BaseViewModel {
             print("populatePackagesPairs - firstPackagesPairWeightInKG: \(firstPackagesPairWeightInKG)")
             print("populatePackagesPairs - populatingPackagesWeightInKG: \(populatingPackagesWeightInKG)\(populatingPackagesWeightInKG > maxCarriableWeightInKG ? ", invalid, cannot more than \(maxCarriableWeightInKG)" : "")")
 
-            if populatingPackagesWeightInKG > maxCarriableWeightInKG || index == packages.count {
+            if populatingPackagesWeightInKG > maxCarriableWeightInKG || index == packages.count - 1 {
                 if populatingPackagesWeightInKG > firstPackagesPairWeightInKG && populatingPackagesWeightInKG <= maxCarriableWeightInKG {
-
-                    if populatingPackagesWeightInKG > firstPackagesPairWeightInKG {
-                        packagesPairs.removeAll()
-                    }
 
                     packagesPairs.append(populatingPackages)
                 }
-                print((index == packages.count ? "REACH END OF LOOP" : "INVALID CASE") + "==============")
+                print((index == packages.count - 1 ? "REACH END OF LOOP" : "INVALID CASE") + "==============")
                 return packagesPairs
             }
 
@@ -175,6 +171,12 @@ public class DeliveryViewModel: BaseViewModel {
             print("populatePackagesPairs - populatingPackages 1st - index: \(index) newlyAddOnPackages: \(newlyAddOnPackages.map { $0.id }) weightInKG: \(newlyAddOnPackages.map { $0.weightInKG })")
             packagesPairs = populatePackagesPairs(index: nextIndex, populatingPackages: newlyAddOnPackages)
 
+            print("")
+            print("populatePackagesPairs - starting a new loop by removing the last package")
+            print("populatePackagesPairs - populatingPackages 2nd - index: \(index) populatingPackages: \(populatingPackages.map { $0.id }) weightInKG: \(populatingPackages.map { $0.weightInKG })")
+
+            packagesPairs = populatePackagesPairs(index: nextIndex, populatingPackages: populatingPackages)
+            
             return packagesPairs
         }
 
