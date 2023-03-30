@@ -132,18 +132,28 @@ public class DeliveryViewModel: BaseViewModel {
         var packagesCopy = self.packages
         var getHeaviestPackagesPairCallTimesIndex = 0
 
-        for _ in packagesCopy {// Need to use this for loop synxtax for 'continue' keyword
+        for _ in packagesCopy where packagesCopy.isEmpty == false { // Need to use this for loop synxtax for 'continue' keyword
             guard let earliestAvailableVehicle = vehicles.sorted(by: { $0.availableTime < $1.availableTime }).first else {
                 continue
             }
-            
+
+            print("\n----------------------------------------")
+            print("getHeaviestPackagesPairCallTimesIndex: \(getHeaviestPackagesPairCallTimesIndex), now left \(packagesCopy.map { $0.id} )")
+            print("----------------------------------------")
             let packagesPair = getHeaviestPackagesPair(packages: packagesCopy, maxCarriableWeightInKG: maxCarriableWeightInKG)
+            getHeaviestPackagesPairCallTimesIndex += 1
 
             let initialAvailableTime = earliestAvailableVehicle.availableTime
             let fromLargestDistancePackages = packagesPair.sorted { $0.distanceInKM > $1.distanceInKM }
 
             fromLargestDistancePackages.forEach { package in
-                timeCosts[package.id] = 0.0
+                let timeToDeliver = (package.distanceInKM / maxSpeed).rounded(toPlaces: 2)
+                let timeCost = (initialAvailableTime + timeToDeliver).rounded(toPlaces: 2)
+
+                if package == packagesPair.first {
+                    earliestAvailableVehicle.setAvailableTime(earliestAvailableVehicle.availableTime + (2 * timeToDeliver))
+                }
+                timeCosts[package.id] = timeCost
             }
 
             // https://stackoverflow.com/a/32938861
