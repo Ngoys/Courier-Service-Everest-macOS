@@ -26,15 +26,6 @@ public class DeliveryViewModel: BaseViewModel {
             Package(id: "PKG5", weightInKG: 155, distanceInKM: 95, offerCode: "NA")
         ]
         //        print(getPackageTotalDeliveryOutput(baseDeliveryCost: 100, numberOfVehicles: 2, maxSpeed: 70, maxCarriableWeightInKG: 200))
-
-        var packagesCopy = self.packages
-        packagesCopy.forEach { package in
-            let pair = getHeaviestPackagesPair(packages: packagesCopy, maxCarriableWeightInKG: 200)
-            print("Result \(pair.map { $0.id })")
-            pair.forEach { package in
-                packagesCopy.removeAll(where: { $0 == package })
-            }
-        }
     }
 
     //----------------------------------------
@@ -137,6 +128,29 @@ public class DeliveryViewModel: BaseViewModel {
         // Return [package.id: timeCost]
         var timeCosts: [String: Double] = [:]
         let vehicles = vehicleStore.getVehicle(count: numberOfVehicles)
+
+        var packagesCopy = self.packages
+        var getHeaviestPackagesPairCallTimesIndex = 0
+
+        for _ in packagesCopy {// Need to use this for loop synxtax for 'continue' keyword
+            guard let earliestAvailableVehicle = vehicles.sorted(by: { $0.availableTime < $1.availableTime }).first else {
+                continue
+            }
+            
+            let packagesPair = getHeaviestPackagesPair(packages: packagesCopy, maxCarriableWeightInKG: maxCarriableWeightInKG)
+
+            let initialAvailableTime = earliestAvailableVehicle.availableTime
+            let fromLargestDistancePackages = packagesPair.sorted { $0.distanceInKM > $1.distanceInKM }
+
+            fromLargestDistancePackages.forEach { package in
+                timeCosts[package.id] = 0.0
+            }
+
+            // https://stackoverflow.com/a/32938861
+            // Remove all packagesPair packages from packagesCopy, as the packages are delivered
+            packagesCopy = packagesCopy.filter { packagesPair.contains($0) == false }
+            print("getTimeCost - removed \(packagesPair.map { $0.id }), now left \(packagesCopy.map { $0.id} )")
+        }
 
         return timeCosts
     }
