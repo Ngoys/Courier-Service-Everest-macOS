@@ -12,6 +12,14 @@ public class DeliveryViewModel: BaseViewModel {
     }
 
     //----------------------------------------
+    // MARK: - Properties
+    //----------------------------------------
+
+    let weightChargedRate = 10.0
+
+    let distanceChargedRate = 5.0
+
+    //----------------------------------------
     // MARK: - Actions
     //----------------------------------------
 
@@ -127,9 +135,8 @@ public class DeliveryViewModel: BaseViewModel {
             getHeaviestPackagesPairCallTimesIndex += 1
 
             let initialAvailableTime = earliestAvailableVehicle.availableTime
-            let fromLargestDistancePackages = packagesPair.sorted { $0.distanceInKM > $1.distanceInKM }
-
-            fromLargestDistancePackages.forEach { package in
+            
+            packagesPair.forEach { package in
                 let timeToDeliver = (package.distanceInKM / maxSpeed).rounded(toPlaces: 2)
                 let timeCost = (initialAvailableTime + timeToDeliver).rounded(toPlaces: 2)
 
@@ -162,13 +169,37 @@ public class DeliveryViewModel: BaseViewModel {
 
             if populatingPackagesWeightInKG > maxCarriableWeightInKG || index == packages.count {
                 if populatingPackagesWeightInKG > firstPackagesPairWeightInKG && populatingPackagesWeightInKG <= maxCarriableWeightInKG {
+                    // Only add new package to packagesPair if populatingPackages weight is larger than previously added packagesPair weight
+                    // Only add new package to packagesPair if populatingPackages weight is lesser than 200
+                    // Fulfilling 'We should prefer heavier packages when there are multiple shipments with the same no. of packages.'
 
-                    if populatingPackagesWeightInKG > firstPackagesPairWeightInKG {
+                    if populatingPackagesWeightInKG > firstPackagesPairWeightInKG && packagesPair.isEmpty == false {
+                        // Reset packagesPair
+                        // As the previously populated packagesPair has lesser weight than the new pairs
+                        logger.debugLog("populatePackagesPair - packagesPair - removing \(packagesPair.map { $0.id }) replace with \(populatingPackages.map { $0.id })")
                         packagesPair.removeAll()
                     }
 
                     packagesPair.append(contentsOf: populatingPackages)
                 }
+
+                if packagesPair.count == populatingPackages.count && firstPackagesPairWeightInKG == populatingPackagesWeightInKG {
+                    // If both packages.count is the same and their weight is the same
+                    // Compare the distanceInKM
+                    // Fulfilling 'If the weights are also the same, preference should be given to the shipment which can be delivered first.'
+                    let firstPackagesPairDistanceInKM = packagesPair.reduce(0) { $0 + $1.distanceInKM }
+                    let populatingPackagesDistanceInKM = populatingPackages.reduce(0) { $0 + $1.distanceInKM }
+
+                    logger.debugLog("populatePackagesPair - firstPackagesPairDistanceInKM: \(firstPackagesPairDistanceInKM)")
+                    logger.debugLog("populatePackagesPair - populatingPackagesDistanceInKM: \(populatingPackagesDistanceInKM)")
+
+                    if populatingPackagesDistanceInKM < firstPackagesPairDistanceInKM {
+                        logger.debugLog("populatePackagesPair - populatingPackagesDistanceInKM \(populatingPackagesDistanceInKM) is larger than firstPackagesPairDistanceInKM \(firstPackagesPairDistanceInKM)")
+                        logger.debugLog("populatePackagesPair - packagesPair - replace with \(populatingPackages.map { $0.id })")
+                        packagesPair = populatingPackages
+                    }
+                }
+
                 logger.debugLog("============== " + (index == packages.count ? "REACH END OF LOOP" : "INVALID CASE") + " ==============")
                 return packagesPair
             }
@@ -182,6 +213,8 @@ public class DeliveryViewModel: BaseViewModel {
             logger.debugLog("")
             logger.debugLog("populatePackagesPair - populatingPackages 1st - index: \(index) newlyAddOnPackages: \(newlyAddOnPackages.map { $0.id }) weightInKG: \(newlyAddOnPackages.map { $0.weightInKG })")
 
+            // As long 'return packagesPair' doesn't get call, we will keep adding new packages to the packagesPair
+            // Fulfilling 'Shipment should contain max packages vehicle can carry in a trip.'
             packagesPair = populatePackagesPair(index: nextIndex, populatingPackages: newlyAddOnPackages)
 
             logger.debugLog("")
@@ -206,8 +239,4 @@ public class DeliveryViewModel: BaseViewModel {
     private let couponStore: CouponStore
 
     private let vehicleStore: VehicleStore
-
-    private let weightChargedRate = 10.0
-
-    private let distanceChargedRate = 5.0
 }

@@ -3,7 +3,7 @@ import Foundation
 public class BaseStore {
 
     //----------------------------------------
-    // MARK: - Internals
+    // MARK: - Properties
     //----------------------------------------
 
     let logger = ServiceContainer.container.resolve(Logger.self)!
