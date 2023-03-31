@@ -13,21 +13,20 @@ public struct CourierServiceCLI: ParsableCommand {
     // MARK:- View model
     //----------------------------------------
 
-    public var viewModel: DeliveryViewModel {
+    public lazy var viewModel: DeliveryViewModel = {
         return DeliveryViewModel(couponStore: ServiceContainer.container.resolve(CouponStore.self)!,
                                  vehicleStore: ServiceContainer.container.resolve(VehicleStore.self)!)
-    }
+    }()
 
     //----------------------------------------
     // MARK: - Actions
     //----------------------------------------
 
     public mutating func run() throws {
-        viewModel.getPackageTotalDeliveryOutput(baseDeliveryCost: 100)//remove it shawn
         //----------------------------------------
         // MARK: - Menu Selection
         //----------------------------------------
-        print("Menu option ('cost' or 'time'):", terminator: " ")
+        print("Welcome to Kiki Courier Service, please enter 'cost' or 'time':")
         guard let menuString = readLine(), let menu = Menu(rawValue: menuString.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)) else {
             print(AppError.invalidMenu.errorDescription)
             throw AppError.invalidMenu
@@ -35,7 +34,7 @@ public struct CourierServiceCLI: ParsableCommand {
 
         print("")
         print("----------------------------------------")
-        print("Calculating \(menu.name)! for the packages delivery")
+        print("Calculating packages \(menu.name)")
         print("----------------------------------------")
         print("")
 
@@ -93,6 +92,7 @@ public struct CourierServiceCLI: ParsableCommand {
             print("Answer")
             print("----------------------------------------")
             print(viewModel.getPackageTotalDeliveryOutput(baseDeliveryCost: baseDeliveryCost))
+            print("")
 
         case .time:
 
@@ -104,23 +104,38 @@ public struct CourierServiceCLI: ParsableCommand {
                 print("Enter input in 'no_of_vehicles max_speed max_carriable_weight' format:")
 
                 let items = readLine()?.components(separatedBy: " ") ?? []
-                if let numberOfVehicles = Int(items.first ?? ""), numberOfVehicles >= 0 {
+                if let numberOfVehicles = Int(items.first ?? ""), numberOfVehicles > 0 {
                     if items.indices.contains(1), let maxSpeed = Double(items[1]) {
-                        if items.indices.contains(2), let maxCarriableWeight = Double(items[2]) {
-                            isAcceptingInput = false
+                        if maxSpeed > 0 {
+                            if items.indices.contains(2), let maxCarriableWeight = Double(items[2]) {
+                                if maxCarriableWeight > 0 {
+                                    isAcceptingInput = false
 
-                            print("")
-                            print("----------------------------------------")
-                            print("Answer")
-                            print("----------------------------------------")
-                            print(viewModel.getPackageTotalDeliveryOutput(baseDeliveryCost: baseDeliveryCost, numberOfVehicles: numberOfVehicles, maxSpeed: maxSpeed, maxCarriableWeightInKG: maxCarriableWeight))
+                                    print("")
+                                    print("----------------------------------------")
+                                    print("Answer")
+                                    print("----------------------------------------")
+                                    print(viewModel.getPackageTotalDeliveryOutput(baseDeliveryCost: baseDeliveryCost, numberOfVehicles: numberOfVehicles, maxSpeed: maxSpeed, maxCarriableWeightInKG: maxCarriableWeight))
+                                    print("")
+
+                                } else {
+                                    print("")
+                                    print(AppError.maxCarriableWeightLessThan1.errorDescription)
+                                }
+                            } else {
+                                print("")
+                                print(AppError.invalidMaxCarriableWeight.errorDescription)
+                            }
                         } else {
-                            print(AppError.invalidMaxCarriableWeight.errorDescription)
+                            print("")
+                            print(AppError.maxSpeedLessThan1.errorDescription)
                         }
                     } else {
+                        print("")
                         print(AppError.invalidMaxSpeed.errorDescription)
                     }
                 } else {
+                    print("")
                     print(AppError.numberOfVehiclesLessThan1.errorDescription)
                 }
             }
