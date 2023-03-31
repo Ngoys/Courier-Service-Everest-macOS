@@ -121,7 +121,7 @@ public class DeliveryViewModel: BaseViewModel {
         let vehicles = vehicleStore.getVehicle(count: numberOfVehicles)
 
         var packagesCopy = self.packages
-        var getHeaviestPackagesPairCallTimesIndex = 0
+        var getPackagesForDeliveryCallTimesIndex = 0
 
         for _ in packagesCopy where packagesCopy.isEmpty == false { // Need to use this for loop synxtax for 'continue' keyword
             guard let earliestAvailableVehicle = vehicles.sorted(by: { $0.availableTime < $1.availableTime }).first else {
@@ -129,10 +129,10 @@ public class DeliveryViewModel: BaseViewModel {
             }
 
             logger.debugLog("\n----------------------------------------")
-            logger.debugLog("getHeaviestPackagesPairCallTimesIndex: \(getHeaviestPackagesPairCallTimesIndex), now left \(packagesCopy.map { $0.id} )")
+            logger.debugLog("getPackagesForDeliveryCallTimesIndex: \(getPackagesForDeliveryCallTimesIndex), now left \(packagesCopy.map { $0.id} )")
             logger.debugLog("----------------------------------------")
-            let packagesPair = getHeaviestPackagesPair(packages: packagesCopy, maxCarriableWeightInKG: maxCarriableWeightInKG)
-            getHeaviestPackagesPairCallTimesIndex += 1
+            let packagesPair = getPackagesForDelivery(packages: packagesCopy, maxCarriableWeightInKG: maxCarriableWeightInKG)
+            getPackagesForDeliveryCallTimesIndex += 1
 
             let initialAvailableTime = earliestAvailableVehicle.availableTime
             
@@ -156,7 +156,7 @@ public class DeliveryViewModel: BaseViewModel {
         return timeCosts
     }
 
-    public func getHeaviestPackagesPair(packages: [Package], maxCarriableWeightInKG: Double) -> [Package] {
+    public func getPackagesForDelivery(packages: [Package], maxCarriableWeightInKG: Double) -> [Package] {
         var packagesPair: [Package] = []
         packagesPair = populatePackagesPair(index: packagesPair.count, populatingPackages: [])
 
