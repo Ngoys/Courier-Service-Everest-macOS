@@ -121,7 +121,7 @@ public class DeliveryViewModel: BaseViewModel {
         let vehicles = vehicleStore.getVehicle(count: numberOfVehicles)
 
         var packagesCopy = self.packages
-        var getHeaviestPackagesPairCallTimesIndex = 0
+        var getDeliveryPackagesCallTimesIndex = 0
 
         for _ in packagesCopy where packagesCopy.isEmpty == false { // Need to use this for loop synxtax for 'continue' keyword
             guard let earliestAvailableVehicle = vehicles.sorted(by: { $0.availableTime < $1.availableTime }).first else {
@@ -129,18 +129,18 @@ public class DeliveryViewModel: BaseViewModel {
             }
 
             logger.debugLog("\n----------------------------------------")
-            logger.debugLog("getHeaviestPackagesPairCallTimesIndex: \(getHeaviestPackagesPairCallTimesIndex), now left \(packagesCopy.map { $0.id} )")
+            logger.debugLog("getDeliveryPackagesCallTimesIndex: \(getDeliveryPackagesCallTimesIndex), now left \(packagesCopy.map { $0.id} )")
             logger.debugLog("----------------------------------------")
-            let packagesPair = getHeaviestPackagesPair(packages: packagesCopy, maxCarriableWeightInKG: maxCarriableWeightInKG)
-            getHeaviestPackagesPairCallTimesIndex += 1
+            let deliveryPackages = getDeliveryPackages(packages: packagesCopy, maxCarriableWeightInKG: maxCarriableWeightInKG)
+            getDeliveryPackagesCallTimesIndex += 1
 
             let initialAvailableTime = earliestAvailableVehicle.availableTime
             
-            packagesPair.forEach { package in
+            deliveryPackages.forEach { package in
                 let timeToDeliver = (package.distanceInKM / maxSpeed).rounded(toPlaces: 2)
                 let timeCost = (initialAvailableTime + timeToDeliver).rounded(toPlaces: 2)
 
-                if package == packagesPair.first {
+                if package == deliveryPackages.first {
                     let newAvailableTime = earliestAvailableVehicle.availableTime + (2 * timeToDeliver)
                     earliestAvailableVehicle.setAvailableTime(newAvailableTime)
                 }
@@ -148,86 +148,86 @@ public class DeliveryViewModel: BaseViewModel {
             }
 
             // https://stackoverflow.com/a/32938861
-            // Remove all packagesPair packages from packagesCopy, as the packages are delivered
-            packagesCopy = packagesCopy.filter { packagesPair.contains($0) == false }
-            logger.debugLog("getTimeCost - removed \(packagesPair.map { $0.id }), now left \(packagesCopy.map { $0.id} )")
+            // Remove all deliveryPackages packages from packagesCopy, as the packages are delivered
+            packagesCopy = packagesCopy.filter { deliveryPackages.contains($0) == false }
+            logger.debugLog("getTimeCost - removed \(deliveryPackages.map { $0.id }), now left \(packagesCopy.map { $0.id} )")
         }
 
         return timeCosts
     }
 
-    public func getHeaviestPackagesPair(packages: [Package], maxCarriableWeightInKG: Double) -> [Package] {
-        var packagesPair: [Package] = []
-        packagesPair = populatePackagesPair(index: packagesPair.count, populatingPackages: [])
+    public func getDeliveryPackages(packages: [Package], maxCarriableWeightInKG: Double) -> [Package] {
+        var deliveryPackages: [Package] = []
+        deliveryPackages = addDeliveryPackages(index: deliveryPackages.count, addingPackages: [])
 
-        func populatePackagesPair(index: Int, populatingPackages: [Package]) -> [Package] {
-            let firstPackagesPairWeightInKG = packagesPair.reduce(0) { $0 + $1.weightInKG }
-            let populatingPackagesWeightInKG = populatingPackages.reduce(0) { $0 + $1.weightInKG }
+        func addDeliveryPackages(index: Int, addingPackages: [Package]) -> [Package] {
+            let firstDeliveryPackagesWeightInKG = deliveryPackages.reduce(0) { $0 + $1.weightInKG }
+            let addingPackagesWeightInKG = addingPackages.reduce(0) { $0 + $1.weightInKG }
 
-            logger.debugLog("populatePackagesPair - firstPackagesPairWeightInKG: \(firstPackagesPairWeightInKG)")
-            logger.debugLog("populatePackagesPair - populatingPackagesWeightInKG: \(populatingPackagesWeightInKG)\(populatingPackagesWeightInKG > maxCarriableWeightInKG ? ", invalid, cannot more than \(maxCarriableWeightInKG)" : "")")
+            logger.debugLog("addDeliveryPackages - firstDeliveryPackagesWeightInKG: \(firstDeliveryPackagesWeightInKG)")
+            logger.debugLog("addDeliveryPackages - addingPackagesWeightInKG: \(addingPackagesWeightInKG)\(addingPackagesWeightInKG > maxCarriableWeightInKG ? ", invalid, cannot more than \(maxCarriableWeightInKG)" : "")")
 
-            if populatingPackagesWeightInKG > maxCarriableWeightInKG || index == packages.count {
-                if populatingPackagesWeightInKG > firstPackagesPairWeightInKG && populatingPackagesWeightInKG <= maxCarriableWeightInKG {
-                    // Only add new package to packagesPair if populatingPackages weight is larger than previously added packagesPair weight
-                    // Only add new package to packagesPair if populatingPackages weight is lesser than 200
+            if addingPackagesWeightInKG > maxCarriableWeightInKG || index == packages.count {
+                if addingPackagesWeightInKG > firstDeliveryPackagesWeightInKG && addingPackagesWeightInKG <= maxCarriableWeightInKG {
+                    // Only add new package to deliveryPackages if addingPackages weight is larger than previously added deliveryPackages weight
+                    // Only add new package to deliveryPackages if addingPackages weight is lesser than 200
                     // Fulfilling 'We should prefer heavier packages when there are multiple shipments with the same no. of packages.'
 
-                    if populatingPackagesWeightInKG > firstPackagesPairWeightInKG && packagesPair.isEmpty == false {
-                        // Reset packagesPair
-                        // As the previously populated packagesPair has lesser weight than the new pairs
-                        logger.debugLog("populatePackagesPair - packagesPair - removing \(packagesPair.map { $0.id }) replace with \(populatingPackages.map { $0.id })")
-                        packagesPair.removeAll()
+                    if addingPackagesWeightInKG > firstDeliveryPackagesWeightInKG && deliveryPackages.isEmpty == false {
+                        // Reset deliveryPackages
+                        // As the previously added deliveryPackages has lesser weight than the new pairs
+                        logger.debugLog("addDeliveryPackages - deliveryPackages - removing \(deliveryPackages.map { $0.id }) replace with \(addingPackages.map { $0.id })")
+                        deliveryPackages.removeAll()
                     }
 
-                    packagesPair.append(contentsOf: populatingPackages)
+                    deliveryPackages.append(contentsOf: addingPackages)
                 }
 
-                if packagesPair.count == populatingPackages.count && firstPackagesPairWeightInKG == populatingPackagesWeightInKG {
+                if deliveryPackages.count == addingPackages.count && firstDeliveryPackagesWeightInKG == addingPackagesWeightInKG {
                     // If both packages.count is the same and their weight is the same
                     // Compare the distanceInKM
                     // Fulfilling 'If the weights are also the same, preference should be given to the shipment which can be delivered first.'
-                    let firstPackagesPairDistanceInKM = packagesPair.reduce(0) { $0 + $1.distanceInKM }
-                    let populatingPackagesDistanceInKM = populatingPackages.reduce(0) { $0 + $1.distanceInKM }
+                    let firstDeliveryPackagesDistanceInKM = deliveryPackages.reduce(0) { $0 + $1.distanceInKM }
+                    let addingPackagesDistanceInKM = addingPackages.reduce(0) { $0 + $1.distanceInKM }
 
-                    logger.debugLog("populatePackagesPair - firstPackagesPairDistanceInKM: \(firstPackagesPairDistanceInKM)")
-                    logger.debugLog("populatePackagesPair - populatingPackagesDistanceInKM: \(populatingPackagesDistanceInKM)")
+                    logger.debugLog("addDeliveryPackages - firstDeliveryPackagesDistanceInKM: \(firstDeliveryPackagesDistanceInKM)")
+                    logger.debugLog("addDeliveryPackages - addingPackagesDistanceInKM: \(addingPackagesDistanceInKM)")
 
-                    if populatingPackagesDistanceInKM < firstPackagesPairDistanceInKM {
-                        logger.debugLog("populatePackagesPair - populatingPackagesDistanceInKM \(populatingPackagesDistanceInKM) is larger than firstPackagesPairDistanceInKM \(firstPackagesPairDistanceInKM)")
-                        logger.debugLog("populatePackagesPair - packagesPair - replace with \(populatingPackages.map { $0.id })")
-                        packagesPair = populatingPackages
+                    if addingPackagesDistanceInKM < firstDeliveryPackagesDistanceInKM {
+                        logger.debugLog("addDeliveryPackages - addingPackagesDistanceInKM \(addingPackagesDistanceInKM) is larger than firstDeliveryPackagesDistanceInKM \(firstDeliveryPackagesDistanceInKM)")
+                        logger.debugLog("addDeliveryPackages - deliveryPackages - replace with \(addingPackages.map { $0.id })")
+                        deliveryPackages = addingPackages
                     }
                 }
 
                 logger.debugLog("============== " + (index == packages.count ? "REACH END OF LOOP" : "INVALID CASE") + " ==============")
-                return packagesPair
+                return deliveryPackages
             }
 
             // Recursive
             let nextIndex = index + 1
 
-            var newlyAddOnPackages = populatingPackages
+            var newlyAddOnPackages = addingPackages
             newlyAddOnPackages.append(packages[index])
 
             logger.debugLog("")
-            logger.debugLog("populatePackagesPair - populatingPackages 1st - index: \(index) newlyAddOnPackages: \(newlyAddOnPackages.map { $0.id }) weightInKG: \(newlyAddOnPackages.map { $0.weightInKG })")
+            logger.debugLog("addDeliveryPackages - addingPackages 1st - index: \(index) newlyAddOnPackages: \(newlyAddOnPackages.map { $0.id }) weightInKG: \(newlyAddOnPackages.map { $0.weightInKG })")
 
-            // As long 'return packagesPair' doesn't get call, we will keep adding new packages to the packagesPair
+            // As long 'return deliveryPackages' doesn't get call, we will keep adding new packages to the deliveryPackages
             // Fulfilling 'Shipment should contain max packages vehicle can carry in a trip.'
-            packagesPair = populatePackagesPair(index: nextIndex, populatingPackages: newlyAddOnPackages)
+            deliveryPackages = addDeliveryPackages(index: nextIndex, addingPackages: newlyAddOnPackages)
 
             logger.debugLog("")
-            logger.debugLog("populatePackagesPair - starting a new loop by removing the last package")
-            logger.debugLog("populatePackagesPair - populatingPackages 2nd - index: \(index) populatingPackages: \(populatingPackages.map { $0.id }) weightInKG: \(populatingPackages.map { $0.weightInKG })")
+            logger.debugLog("addDeliveryPackages - starting a new loop by removing the last package")
+            logger.debugLog("addDeliveryPackages - addingPackages 2nd - index: \(index) addingPackages: \(addingPackages.map { $0.id }) weightInKG: \(addingPackages.map { $0.weightInKG })")
 
-            packagesPair = populatePackagesPair(index: nextIndex, populatingPackages: populatingPackages)
+            deliveryPackages = addDeliveryPackages(index: nextIndex, addingPackages: addingPackages)
 
-            logger.debugLog("populatePackagesPair - packagesPair \(packagesPair.map { $0.id })")
-            return packagesPair
+            logger.debugLog("addDeliveryPackages - deliveryPackages \(deliveryPackages.map { $0.id })")
+            return deliveryPackages
         }
 
-        return packagesPair
+        return deliveryPackages
     }
 
     //----------------------------------------

@@ -155,7 +155,7 @@ class DeliveryViewModelTest: BaseTest {
         XCTAssertEqual(timeCosts, ["PKG4": 0.85, "PKG1": 3.98, "PKG2": 1.78, "PKG5": 4.18, "PKG3": 1.42])
     }
 
-    func test_getHeaviestPackagesPair() {
+    func test_getDeliveryPackages() {
         setupViewModel()
 
         var packages = [
@@ -165,7 +165,7 @@ class DeliveryViewModelTest: BaseTest {
             Package(id: "PKG4", weightInKG: 110, distanceInKM: 60, offerCode: "OFR002"),
             Package(id: "PKG5", weightInKG: 155, distanceInKM: 95, offerCode: "NA")
         ]
-        XCTAssertEqual(viewModel.getHeaviestPackagesPair(packages: packages, maxCarriableWeightInKG: maxCarriableWeightInKG), [packages[1], packages[3]])
+        XCTAssertEqual(viewModel.getDeliveryPackages(packages: packages, maxCarriableWeightInKG: maxCarriableWeightInKG), [packages[1], packages[3]])
 
         //----------------------------------------
         // Delivery Criteria
@@ -178,7 +178,7 @@ class DeliveryViewModelTest: BaseTest {
             Package(id: "PKG4", weightInKG: 50, distanceInKM: 60, offerCode: "OFR002"),
             Package(id: "PKG5", weightInKG: 150, distanceInKM: 95, offerCode: "NA")
         ]
-        XCTAssertEqual(viewModel.getHeaviestPackagesPair(packages: packages, maxCarriableWeightInKG: maxCarriableWeightInKG), [packages[0], packages[2], packages[3]])
+        XCTAssertEqual(viewModel.getDeliveryPackages(packages: packages, maxCarriableWeightInKG: maxCarriableWeightInKG), [packages[0], packages[2], packages[3]])
 
         //----------------------------------------
         // Delivery Criteria
@@ -191,7 +191,7 @@ class DeliveryViewModelTest: BaseTest {
             Package(id: "PKG4", weightInKG: 99, distanceInKM: 10, offerCode: "OFR002"),
             Package(id: "PKG5", weightInKG: 99, distanceInKM: 10, offerCode: "NA")
         ]
-        XCTAssertEqual(viewModel.getHeaviestPackagesPair(packages: packages, maxCarriableWeightInKG: maxCarriableWeightInKG), [packages[0], packages[1]])
+        XCTAssertEqual(viewModel.getDeliveryPackages(packages: packages, maxCarriableWeightInKG: maxCarriableWeightInKG), [packages[0], packages[1]])
 
         //----------------------------------------
         // Delivery Criteria
@@ -204,6 +204,6 @@ class DeliveryViewModelTest: BaseTest {
             Package(id: "PKG4", weightInKG: 100, distanceInKM: 100, offerCode: "OFR002"),
             Package(id: "PKG5", weightInKG: 100, distanceInKM: 100, offerCode: "NA")
         ]
-        XCTAssertEqual(viewModel.getHeaviestPackagesPair(packages: packages, maxCarriableWeightInKG: maxCarriableWeightInKG), [packages[0], packages[1]])
+        XCTAssertEqual(viewModel.getDeliveryPackages(packages: packages, maxCarriableWeightInKG: maxCarriableWeightInKG), [packages[0], packages[1]])
     }
 }
