@@ -135,9 +135,8 @@ public class DeliveryViewModel: BaseViewModel {
             getHeaviestPackagesPairCallTimesIndex += 1
 
             let initialAvailableTime = earliestAvailableVehicle.availableTime
-            let fromLargestDistancePackages = packagesPair.sorted { $0.distanceInKM > $1.distanceInKM }
-
-            fromLargestDistancePackages.forEach { package in
+            
+            packagesPair.forEach { package in
                 let timeToDeliver = (package.distanceInKM / maxSpeed).rounded(toPlaces: 2)
                 let timeCost = (initialAvailableTime + timeToDeliver).rounded(toPlaces: 2)
 
