@@ -194,7 +194,7 @@ public class DeliveryViewModel: BaseViewModel {
                     logger.debugLog("populatePackagesPair - firstPackagesPairDistanceInKM: \(firstPackagesPairDistanceInKM)")
                     logger.debugLog("populatePackagesPair - populatingPackagesDistanceInKM: \(populatingPackagesDistanceInKM)")
 
-                    if populatingPackagesDistanceInKM > firstPackagesPairDistanceInKM {
+                    if populatingPackagesDistanceInKM < firstPackagesPairDistanceInKM {
                         logger.debugLog("populatePackagesPair - populatingPackagesDistanceInKM \(populatingPackagesDistanceInKM) is larger than firstPackagesPairDistanceInKM \(firstPackagesPairDistanceInKM)")
                         logger.debugLog("populatePackagesPair - packagesPair - replace with \(populatingPackages.map { $0.id })")
                         packagesPair = populatingPackages
