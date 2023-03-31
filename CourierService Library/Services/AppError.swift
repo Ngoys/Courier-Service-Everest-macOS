@@ -11,7 +11,9 @@ public enum AppError: Error, Equatable {
     case invalidDistanceInKM
     case numberOfVehiclesLessThan1
     case invalidMaxSpeed
+    case maxSpeedLessThan1
     case invalidMaxCarriableWeight
+    case maxCarriableWeightLessThan1
 
     //----------------------------------------
     // MARK: - Properties
@@ -49,8 +51,14 @@ public enum AppError: Error, Equatable {
         case .invalidMaxSpeed:
             return "Invalid max_speed input, input must be in digit"
 
+        case .maxSpeedLessThan1:
+            return "max_speed must be more than 0"
+
         case .invalidMaxCarriableWeight:
             return "Invalid max_carriable_weight input, input must be in digit"
+
+        case .maxCarriableWeightLessThan1:
+            return "max_carriable_weight must be more than 0"
         }
     }
 }

@@ -9,23 +9,6 @@ public class DeliveryViewModel: BaseViewModel {
     public init(couponStore: CouponStore, vehicleStore: VehicleStore) {
         self.couponStore = couponStore
         self.vehicleStore = vehicleStore
-        super.init()
-//shawn delete this
-        //        self.packages = [
-        //            Package(id: "PKG1", weightInKG: 5, distanceInKM: 5, offerCode: "OFR001"),
-        //            Package(id: "PKG2", weightInKG: 15, distanceInKM: 5, offerCode: "OFR002"),
-        //            Package(id: "PKG3", weightInKG: 10, distanceInKM: 100, offerCode: "OFR003"),
-        //        ]
-        //        logger.debugLog(getPackageTotalDeliveryCostOutput(baseDeliveryCost: 100))
-
-        self.packages = [
-            Package(id: "PKG1", weightInKG: 50, distanceInKM: 30, offerCode: "OFR001"),
-            Package(id: "PKG2", weightInKG: 75, distanceInKM: 125, offerCode: "OFR008"),
-            Package(id: "PKG3", weightInKG: 175, distanceInKM: 100, offerCode: "OFR003"),
-            Package(id: "PKG4", weightInKG: 110, distanceInKM: 60, offerCode: "OFR002"),
-            Package(id: "PKG5", weightInKG: 155, distanceInKM: 95, offerCode: "NA")
-        ]
-        logger.debugLog(getPackageTotalDeliveryOutput(baseDeliveryCost: 100, numberOfVehicles: 2, maxSpeed: 70, maxCarriableWeightInKG: 200))
     }
 
     //----------------------------------------
@@ -151,7 +134,8 @@ public class DeliveryViewModel: BaseViewModel {
                 let timeCost = (initialAvailableTime + timeToDeliver).rounded(toPlaces: 2)
 
                 if package == packagesPair.first {
-                    earliestAvailableVehicle.setAvailableTime(earliestAvailableVehicle.availableTime + (2 * timeToDeliver))
+                    let newAvailableTime = earliestAvailableVehicle.availableTime + (2 * timeToDeliver)
+                    earliestAvailableVehicle.setAvailableTime(newAvailableTime)
                 }
                 timeCosts[package.id] = timeCost
             }
@@ -166,27 +150,27 @@ public class DeliveryViewModel: BaseViewModel {
     }
 
     public func getHeaviestPackagesPair(packages: [Package], maxCarriableWeightInKG: Double) -> [Package] {
-        var packagesPairs: [[Package]] = []
-        packagesPairs = populatePackagesPairs(index: packagesPairs.count, populatingPackages: [])
+        var packagesPair: [Package] = []
+        packagesPair = populatePackagesPair(index: packagesPair.count, populatingPackages: [])
 
-        func populatePackagesPairs(index: Int, populatingPackages: [Package]) -> [[Package]] {
-            let firstPackagesPairWeightInKG = (packagesPairs.first ?? []).reduce(0) { $0 + $1.weightInKG }
+        func populatePackagesPair(index: Int, populatingPackages: [Package]) -> [Package] {
+            let firstPackagesPairWeightInKG = packagesPair.reduce(0) { $0 + $1.weightInKG }
             let populatingPackagesWeightInKG = populatingPackages.reduce(0) { $0 + $1.weightInKG }
 
-            logger.debugLog("populatePackagesPairs - firstPackagesPairWeightInKG: \(firstPackagesPairWeightInKG)")
-            logger.debugLog("populatePackagesPairs - populatingPackagesWeightInKG: \(populatingPackagesWeightInKG)\(populatingPackagesWeightInKG > maxCarriableWeightInKG ? ", invalid, cannot more than \(maxCarriableWeightInKG)" : "")")
+            logger.debugLog("populatePackagesPair - firstPackagesPairWeightInKG: \(firstPackagesPairWeightInKG)")
+            logger.debugLog("populatePackagesPair - populatingPackagesWeightInKG: \(populatingPackagesWeightInKG)\(populatingPackagesWeightInKG > maxCarriableWeightInKG ? ", invalid, cannot more than \(maxCarriableWeightInKG)" : "")")
 
             if populatingPackagesWeightInKG > maxCarriableWeightInKG || index == packages.count {
                 if populatingPackagesWeightInKG > firstPackagesPairWeightInKG && populatingPackagesWeightInKG <= maxCarriableWeightInKG {
 
                     if populatingPackagesWeightInKG > firstPackagesPairWeightInKG {
-                        packagesPairs.removeAll()
+                        packagesPair.removeAll()
                     }
 
-                    packagesPairs.append(populatingPackages)
+                    packagesPair.append(contentsOf: populatingPackages)
                 }
-                logger.debugLog((index == packages.count ? "REACH END OF LOOP" : "INVALID CASE") + "==============")
-                return packagesPairs
+                logger.debugLog("============== " + (index == packages.count ? "REACH END OF LOOP" : "INVALID CASE") + " ==============")
+                return packagesPair
             }
 
             // Recursive
@@ -196,21 +180,21 @@ public class DeliveryViewModel: BaseViewModel {
             newlyAddOnPackages.append(packages[index])
 
             logger.debugLog("")
-            logger.debugLog("populatePackagesPairs - populatingPackages 1st - index: \(index) newlyAddOnPackages: \(newlyAddOnPackages.map { $0.id }) weightInKG: \(newlyAddOnPackages.map { $0.weightInKG })")
+            logger.debugLog("populatePackagesPair - populatingPackages 1st - index: \(index) newlyAddOnPackages: \(newlyAddOnPackages.map { $0.id }) weightInKG: \(newlyAddOnPackages.map { $0.weightInKG })")
 
-            packagesPairs = populatePackagesPairs(index: nextIndex, populatingPackages: newlyAddOnPackages)
+            packagesPair = populatePackagesPair(index: nextIndex, populatingPackages: newlyAddOnPackages)
 
             logger.debugLog("")
-            logger.debugLog("populatePackagesPairs - starting a new loop by removing the last package")
-            logger.debugLog("populatePackagesPairs - populatingPackages 2nd - index: \(index) populatingPackages: \(populatingPackages.map { $0.id }) weightInKG: \(populatingPackages.map { $0.weightInKG })")
+            logger.debugLog("populatePackagesPair - starting a new loop by removing the last package")
+            logger.debugLog("populatePackagesPair - populatingPackages 2nd - index: \(index) populatingPackages: \(populatingPackages.map { $0.id }) weightInKG: \(populatingPackages.map { $0.weightInKG })")
 
-            packagesPairs = populatePackagesPairs(index: nextIndex, populatingPackages: populatingPackages)
+            packagesPair = populatePackagesPair(index: nextIndex, populatingPackages: populatingPackages)
 
-            logger.debugLog("populatePackagesPairs - packagesPairs \(packagesPairs.flatMap { $0.map { $0.id }})")
-            return packagesPairs
+            logger.debugLog("populatePackagesPair - packagesPair \(packagesPair.map { $0.id })")
+            return packagesPair
         }
 
-        return packagesPairs.first ?? []
+        return packagesPair
     }
 
     //----------------------------------------
