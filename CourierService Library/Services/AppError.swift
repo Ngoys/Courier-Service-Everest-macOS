@@ -37,7 +37,7 @@ public enum AppError: Error, Equatable {
             return "Cannot add package with same ID as the previously added ones"
 
         case .invalidPackageID:
-            return "Invalid pkg_id1"
+            return "Invalid pkg_id"
 
         case .invalidWeightInKG:
             return "Invalid pkg_weight_in_kg input, input must be in digit"
