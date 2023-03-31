@@ -165,7 +165,6 @@ class DeliveryViewModelTest: BaseTest {
             Package(id: "PKG4", weightInKG: 110, distanceInKM: 60, offerCode: "OFR002"),
             Package(id: "PKG5", weightInKG: 155, distanceInKM: 95, offerCode: "NA")
         ]
-
         XCTAssertEqual(viewModel.getHeaviestPackagesPair(packages: packages, maxCarriableWeightInKG: maxCarriableWeightInKG), [packages[1], packages[3]])
 
         //----------------------------------------
@@ -179,18 +178,18 @@ class DeliveryViewModelTest: BaseTest {
             Package(id: "PKG4", weightInKG: 50, distanceInKM: 60, offerCode: "OFR002"),
             Package(id: "PKG5", weightInKG: 150, distanceInKM: 95, offerCode: "NA")
         ]
-        XCTAssertEqual(viewModel.getHeaviestPackagesPair(packages: packages, maxCarriableWeightInKG: maxCarriableWeightInKG), [packages[0], packages[1], packages[2]])
+        XCTAssertEqual(viewModel.getHeaviestPackagesPair(packages: packages, maxCarriableWeightInKG: maxCarriableWeightInKG), [packages[1], packages[2], packages[3]])
 
         //----------------------------------------
         // Delivery Criteria
         // We should prefer heavier packages when there are multiple shipments with the same no. of packages.
         //----------------------------------------
         packages = [
-            Package(id: "PKG1", weightInKG: 100, distanceInKM: 30, offerCode: "OFR001"),
-            Package(id: "PKG2", weightInKG: 100, distanceInKM: 125, offerCode: "OFR008"),
+            Package(id: "PKG1", weightInKG: 100, distanceInKM: 10, offerCode: "OFR001"),
+            Package(id: "PKG2", weightInKG: 100, distanceInKM: 10, offerCode: "OFR008"),
             Package(id: "PKG3", weightInKG: 9999999, distanceInKM: 9999999, offerCode: "OFR003"),
-            Package(id: "PKG4", weightInKG: 99, distanceInKM: 60, offerCode: "OFR002"),
-            Package(id: "PKG5", weightInKG: 99, distanceInKM: 95, offerCode: "NA")
+            Package(id: "PKG4", weightInKG: 99, distanceInKM: 10, offerCode: "OFR002"),
+            Package(id: "PKG5", weightInKG: 99, distanceInKM: 10, offerCode: "NA")
         ]
         XCTAssertEqual(viewModel.getHeaviestPackagesPair(packages: packages, maxCarriableWeightInKG: maxCarriableWeightInKG), [packages[0], packages[1]])
 
@@ -199,12 +198,12 @@ class DeliveryViewModelTest: BaseTest {
         // If the weights are also the same, preference should be given to the shipment which can be delivered first.
         //----------------------------------------
         packages = [
-            Package(id: "PKG1", weightInKG: 100, distanceInKM: 100, offerCode: "OFR001"),
-            Package(id: "PKG2", weightInKG: 100, distanceInKM: 100, offerCode: "OFR008"),
+            Package(id: "PKG1", weightInKG: 100, distanceInKM: 5, offerCode: "OFR001"),
+            Package(id: "PKG2", weightInKG: 100, distanceInKM: 5, offerCode: "OFR008"),
             Package(id: "PKG3", weightInKG: 9999999, distanceInKM: 9999999, offerCode: "OFR003"),
-            Package(id: "PKG4", weightInKG: 100, distanceInKM: 5, offerCode: "OFR002"),
-            Package(id: "PKG5", weightInKG: 100, distanceInKM: 5, offerCode: "NA")
+            Package(id: "PKG4", weightInKG: 100, distanceInKM: 100, offerCode: "OFR002"),
+            Package(id: "PKG5", weightInKG: 100, distanceInKM: 100, offerCode: "NA")
         ]
-        XCTAssertEqual(viewModel.getHeaviestPackagesPair(packages: packages, maxCarriableWeightInKG: maxCarriableWeightInKG), [packages[0], packages[1]])
+        XCTAssertEqual(viewModel.getHeaviestPackagesPair(packages: packages, maxCarriableWeightInKG: maxCarriableWeightInKG), [packages[3], packages[4]])
     }
 }
