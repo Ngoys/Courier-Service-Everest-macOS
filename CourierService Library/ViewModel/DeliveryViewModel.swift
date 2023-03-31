@@ -12,6 +12,14 @@ public class DeliveryViewModel: BaseViewModel {
     }
 
     //----------------------------------------
+    // MARK: - Properties
+    //----------------------------------------
+
+    let weightChargedRate = 10.0
+
+    let distanceChargedRate = 5.0
+
+    //----------------------------------------
     // MARK: - Actions
     //----------------------------------------
 
@@ -206,8 +214,4 @@ public class DeliveryViewModel: BaseViewModel {
     private let couponStore: CouponStore
 
     private let vehicleStore: VehicleStore
-
-    private let weightChargedRate = 10.0
-
-    private let distanceChargedRate = 5.0
 }
