@@ -140,7 +140,9 @@ public class DeliveryViewModel: BaseViewModel {
                 let timeToDeliver = (package.distanceInKM / maxSpeed).rounded(toPlaces: 2)
                 let timeCost = (initialAvailableTime + timeToDeliver).rounded(toPlaces: 2)
 
-                if package == deliveryPackages.first {
+                if package == deliveryPackages.sorted(by: { $0.distanceInKM > $1.distanceInKM }).first {
+                    // If the package has the longest distance,
+                    // Take its distanceInKM * 2 for the total time taken for the delivery trip
                     let newAvailableTime = earliestAvailableVehicle.availableTime + (2 * timeToDeliver)
                     earliestAvailableVehicle.setAvailableTime(newAvailableTime)
                 }
