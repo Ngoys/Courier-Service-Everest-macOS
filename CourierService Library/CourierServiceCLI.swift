@@ -95,10 +95,10 @@ public struct CourierServiceCLI: ParsableCommand {
             print("")
 
         case .time:
-
             //----------------------------------------
             // MARK: - NumberOfVehicles and MaxSpeed and MaxCarriableWeight
             //----------------------------------------
+
             var isAcceptingInput = true
             while isAcceptingInput {
                 print("Enter input in 'no_of_vehicles max_speed max_carriable_weight' format:")

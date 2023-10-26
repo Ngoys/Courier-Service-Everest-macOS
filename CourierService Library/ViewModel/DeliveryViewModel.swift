@@ -66,8 +66,7 @@ public class DeliveryViewModel: BaseViewModel {
     }
 
     public func getTotalCost(baseDeliveryCost: Double, package: Package) -> Double {
-        let totalCost = baseDeliveryCost + (package.weightInKG * weightChargedRate) + (package.distanceInKM * distanceChargedRate)
-        return totalCost
+        return baseDeliveryCost + (package.weightInKG * weightChargedRate) + (package.distanceInKM * distanceChargedRate)
     }
 
     public func getDiscountedCost(baseDeliveryCost: Double, package: Package) -> Double {
@@ -131,22 +130,23 @@ public class DeliveryViewModel: BaseViewModel {
             logger.debugLog("\n----------------------------------------")
             logger.debugLog("getDeliveryPackagesCallTimesIndex: \(getDeliveryPackagesCallTimesIndex), now left \(packagesCopy.map { $0.id} )")
             logger.debugLog("----------------------------------------")
-            let deliveryPackages = getDeliveryPackages(packages: packagesCopy, maxCarriableWeightInKG: maxCarriableWeightInKG)
             getDeliveryPackagesCallTimesIndex += 1
 
+            let deliveryPackages = getDeliveryPackages(packages: packagesCopy, maxCarriableWeightInKG: maxCarriableWeightInKG)
             let initialAvailableTime = earliestAvailableVehicle.availableTime
             
             deliveryPackages.forEach { package in
                 let timeToDeliver = (package.distanceInKM / maxSpeed).rounded(toPlaces: 2)
                 let timeCost = (initialAvailableTime + timeToDeliver).rounded(toPlaces: 2)
 
+                timeCosts[package.id] = timeCost
+
                 if package == deliveryPackages.sorted(by: { $0.distanceInKM > $1.distanceInKM }).first {
-                    // If the package has the longest distance,
+                    // Take the package that has the longest distance,
                     // Take its distanceInKM * 2 for the total time taken for the delivery trip
                     let newAvailableTime = earliestAvailableVehicle.availableTime + (2 * timeToDeliver)
                     earliestAvailableVehicle.setAvailableTime(newAvailableTime)
                 }
-                timeCosts[package.id] = timeCost
             }
 
             // https://stackoverflow.com/a/32938861
